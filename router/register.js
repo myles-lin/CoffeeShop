@@ -10,20 +10,20 @@ router.get("/", (req, res) => {
 
 router.post("/", async (req, res) => {
     const db = connectDB();
-    let username = req.body.username;
+    let account = req.body.account;
     let password = req.body.password;
 
-    let result = await memberModel.findOne({ username : username });
+    let result = await memberModel.findOne({ account : account });
     if (result !== null) {
         // res.send("信箱已被註冊過，請更換其他信箱。");
         res.redirect("/error?msg=信箱已經被註冊。");
     } else {
         const member = new memberModel({
-            username : username,
+            account : account,
             password : password
         });
         member.save();
-        res.redirect("/members");
+        res.redirect("/");
     };
 });
 

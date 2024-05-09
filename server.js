@@ -1,49 +1,72 @@
 const express = require("express");
-const app = express();
-const portNum = 4000;
 const path = require("path");
 const hbs = require("hbs");
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
+const session = require("express-session");
 const mongoose = require('mongoose');
 const connectDB = require("./utils/db");
 const memberModel = require("./models/memberModel");
+const validator = require("./utils/validator");
+
+const app = express();
+const portNum = 5000;
 
 // 設定模板引擎
 app.engine("html", hbs.__express);
+app.set('view engine', 'ejs');
 // 設定 template 路徑
 app.set("views", path.join(__dirname, "public", "views"));
 // 設定靜態檔案路徑
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(session({
+    secret : "pour over is good.",
+    name : "_coffee",
+    resave : true , // Forces the session to be saved back to the session store, even if the session was never modified during the request.
+    saveUninitialized : false // Forces a session that is “uninitialized” to be saved to the store. A session is uninitialized when it is new but not modified.
+}));
 
 // 引入 /router/members.js
 const membersRouter = require("./router/members");
 const registerRouter = require("./router/register");
 const booksRouter = require("./router/books");
 const aboutRouter = require("./router/about");
+const adminRouter = require("./router/adminAuth");
 
 app.get("/", (req, res) => {
-    res.render("index.html");
+    let path = "";
+    console.log(req.session);
+    res.render("index", { path : null });
 });
 
-app.post("/login", async (req, res) =>{
+app.get("/login", (req, res) => {
+    let path = "../views/login.html";
+    res.render("index", { path : path });
+});
+
+app.post("/login", async (req, res, next) => {
     const db = connectDB();
-    let username = req.body.username;
+    let account = req.body.account;
     let password = req.body.password;
     let result = await memberModel.findOne({
         '$and' : [
-            { username : username },
+            { account : account },
             { password : password}
         ]
     });
     console.log(result);
-    if (result === null) {
-        res.redirect("/error?msg=帳號或密碼輸入錯誤。");
+    if (result !== null) {
+        next();
     } else {
-        res.redirect("/members")
+        res.redirect("/error?msg=帳號或密碼輸入錯誤。");
     };
-});
+    },
+    validator.setSessionInfo,
+    (req, res) => {
+        res.send("Welcome");
+    }
+);
 
 app.get("/error", (req, res) => {
     // let message = "發生錯誤，請聯繫客服。";
@@ -56,6 +79,7 @@ app.use("/register", registerRouter);
 app.use("/members", membersRouter);
 app.use("/books", booksRouter);
 app.use("/about", aboutRouter);
+app.use("/adminAuth", adminRouter);
 
 app.listen(portNum, ()=>{
     console.log(`Server is running at localhost:${portNum}`);

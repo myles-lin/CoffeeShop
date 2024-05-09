@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/home_style.css">
+</head>
+<body>
+    <h1>管理者介面</h1>
+    <ul>
+        <li>11</li>
+        <li>11</li>
+    </ul>
+    <form action="/adminAuth/products" method="POST" class="form-group">
+        <div>
+            <label for="name">Name</label>
+            <input type="text" id="password" name="name" required>
+        </div>
+        <div>
+            <label for="category">Category</label>
+            <select id="category" name="category" required>
+                <option value="coffee beans" selected>coffee beans</option>
+                <option value="brewing equipment">brewing equipment</option>
+                <option value="grinder">grinder</option>
+            </select>
+        </div>
+        <div>
+            <label for="category">Roast Level</label>
+            <select id="roastlevle" name="roastlevle">
+                <option value="none" selected>none</option>
+                <option value="asia">light roast</option>
+                <option value="latin america">medium roast</option>
+                <option value="africa">dark roast</option>
+            </select>
+        </div>
+        <div>
+            <label for="category">Region</label>
+            <select id="region" name="region">
+                <option value="none" selected>none</option>
+                <option value="asia">asia</option>
+                <option value="latin america">latin america</option>
+                <option value="africa">africa</option>
+            </select>
+        </div>
+        <div>
+            <label for="category">Quantity</label>
+            <input type="number" id="quantity" name="quantity" min="1" required>
+        </div>
+        <div>
+            <label for="category">Price</label>
+            <input type="number" id="price" name="price" min="1" required>
+        </div>
+        <div>
+            <label for="content">Content</label><br>
+            <textarea class="content-box" name="content" rows="5" cols="40">你的留言</textarea>
+        </div>
+        <button type="submit">Add</button>
+    </form>
+
+    <form method="GET" action="/adminAuth/test">
+        <select id="region" name="region">
+            <option value="none">none</option>
+            <option value="asia">asia</option>
+            <option value="latin america">latin america</option>
+            <option value="africa">africa</option>
+        </select>
+    <button type="submit">Add</button>
+    </form>
+</body>
+</html>

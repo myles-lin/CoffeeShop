@@ -1,0 +1,530 @@
+
+<!DOCTYPE html>
+<head>
+	<script src="../css/jquery-3.6.0.min.js"></script>
+	<script defer src="../css/gl-common.js"></script>
+  <!-- <script src="https://basefile.akamaized.net/calma-base-shop/6619031740da8/jquery-3.6.0.min.js"></script> -->
+	<!-- <script defer src="https://basefile.akamaized.net/calma-base-shop/6539b8f3ce268/gl-common.js?1715068508600"></script> -->
+		<style>
+		:root {
+			--BodyFontSize: 15px;
+			--BodyFontColor: #333;
+			--BodyLinkColor: #2096F3;
+			--BgColorHeader: #fff;
+			--LogoImgSize: 32px;
+			--LogoTextColorBgOn: #434343;
+			--LogoTextSize: 16px;
+			--NavTextColor: #fff;
+			--NavTextColorBgOn: #333;
+			--NavFontSize: 16px;
+			--NavFontWeight: 700;
+			--FooterNavBgColor: ;
+			--FooterNavFontColor: ;
+			--FooterBgColor: ;
+			--FooterFontColor: ;
+			--TitleFontSize: 24px;
+			--TitleFontWeight: 700;
+			--TitleColor: #434343;
+			--TitleAline: left;
+			--BtnRadius: 0;
+			--BtnColor: #333;
+			--BtnTextColor: #FBFAF0;
+			--BtnTextWeight: 700;
+			--SlideTitleWeight: 700;
+			--SlideTextColor01: #FFFFFF;
+			--SlideBtnTextColor01: #333;
+			--SlideTextColor02: #fff;
+			--SlideBtnTextColor02: #333;
+			--SlideTextColor03: #fff;
+			--SlideBtnTextColor03: #333;
+			--AreaBanner: 5;
+			--AreaPickup: 5;
+			--AreaRanking: 5;
+			--AreaBlog: 5;
+			--AreaItem: 5;
+			--ItemImgRatio: 1/1;
+			--ItemPriceWeight: 400;
+			--StatusColor: #B01F24;
+			--ItemDetailCommonColor: ;
+			--CategoryLowerHeader: url(https://baseec-img-mng.akamaized.net/images/shop_front/lonich-official-ec/2ba214935f3d514622ffeab207a54e12.jpg);
+			--ConceptBgColor: #FBFAF0;
+			--ConceptTitleColor: #FFFFFF;
+			--ConceptTextColor: #FFFFFF;
+			--ConceptBtnColor: #434343;
+			--ConceptBtnTextColor: #fff;
+			--InfoTextColor: ;
+			--BannerTitleWeight: 700;
+			--PickUpImgRatio: 1/1;
+			--RankingLabelColor: #333;
+			--BlogLowerHeader: url(/img/1px.png);
+			--BlogImgRatio: 3/2;
+			--AboutLowerHeader: url(https://baseec-img-mng.akamaized.net/images/shop_front/lonich-official-ec/591c4bf1af14c6a94d679e7720ff5471.jpg);
+			--AboutSubTitleColor: ;
+			--ShippingChargeColor: #F54336;
+			--FaqColor: #000;
+			--FaqColorQ: #fff;
+			--CommunityLowerHeader: url(/img/1px.png);
+			--MembershipLowerHeader: url(https://baseec-img-mng.akamaized.net/images/shop_front/lonich-official-ec/5d0684c4285983287b90c04b6d244c82.png);
+			--MembershipRewardImgRatio: 3/2;
+			--NewsAppBorder: #B01F24;
+		}
+	</style>
+	<link rel="stylesheet" href="https://basefile.akamaized.net/calma-base-shop/661903bcef666/swiper-bundle-8.4.6.min.css">
+	<link rel="stylesheet" href="https://basefile.akamaized.net/calma-base-shop/65dad501ed0f0/gl-common.css?1715068508600">
+	
+<style type="text/css">
+body { 
+        background-image: none;
+        background-color: #D3D7D8;
+     }
+</style>
+
+
+		<link rel="stylesheet" href="https://basefile.akamaized.net/calma-base-shop/6539b8c893788/gl-index.css?1715068508600">
+	
+	<style>
+	/* foundation ================= */
+	/* base */
+	body {
+		font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+	}
+
+	/* font */
+	.c-font--display .header__logo, .c-font--display .gnav__menu .gnav__link, .c-font--display .mailmagazine__title .gnav__link, .c-font--display .gnav__menu--child a, .c-font--display .appsItemCategoryTag_child a, .c-font--display .appsItemCategoryTag_lowerchild a, .c-font--display .p-slide__title, .c-font--display .p-slide__btn a, .c-font--display .lower__title, .c-font--display .c-sec__title, .c-font--display .p-about__catch, .c-font--display .p-about__sub, .c-font--display#community .communityTitle, .c-font--display .p-concept__catch, .c-font--display .c-btn, .c-font--display .purchaseButton__btn, .c-font--display .salesPeriodModal__btn, .c-font--display .purchaseButtonModal__btn, .c-font--display .inquirySection .control-panel input#buttonLeave, .c-font--display #inquiryCompleteSection a, .c-font--display .mailMagazineSubscribe_submit, .c-font--display .communityButton, .c-font--display .review01__title, .c-font--display#MembershipPage .membership .heading, .c-font--display#MembershipPage .logo-text, .c-font--display#MembershipPage .membership .link, .c-font--display#MembershipPage .membership .edit, .c-font--display#MembershipPage .membership .mypage .customer-info, .c-font--display#MembershipPage .membership .mypage .definition-term {
+		font-family: 'Roboto Condensed', 'Noto Sans JP', sans-serif !important;
+	}
+	.c-font--mincho .header__logo, .c-font--mincho .gnav__menu .gnav__link, .c-font--mincho .mailmagazine__title .gnav__link, .c-font--mincho .gnav__menu--child a, .c-font--mincho .appsItemCategoryTag_child a, .c-font--mincho .appsItemCategoryTag_lowerchild a, .c-font--mincho .p-slide__title, .c-font--mincho .p-slide__btn a, .c-font--mincho .lower__title, .c-font--mincho .c-sec__title, .c-font--mincho .p-banner__title, .c-font--mincho .p-pickup__title, .c-font--mincho .p-ranking__title, .c-font--mincho .p-item__title, .c-font--mincho #itemDetail .p-item__price h2, .c-font--mincho .p-related__title, .c-font--mincho #itemDetail .p-item__price .discountPrice__calcPrice, .c-font--mincho .p-guide__title, .c-font--mincho .p-blog__title, .c-font--mincho .blog_title a, .c-font--mincho #blog .main #about .blog_body h3, .c-font--mincho #community .communityPrice, .c-font--mincho #privacy dt, .c-font--mincho #law h3, .c-font--mincho .p-about__catch, .c-font--mincho .p-about__sub, .c-font--mincho .appsItemDetailCustomTag_heading, .c-font--mincho#community .communityTitle, .c-font--mincho .p-concept__catch, .c-font--mincho .c-btn, .c-font--mincho .purchaseButton__btn, .c-font--mincho .salesPeriodModal__btn, .c-font--mincho .purchaseButtonModal__btn, .c-font--mincho .inquirySection .control-panel input#buttonLeave, .c-font--mincho #inquiryCompleteSection a, .c-font--mincho .mailMagazineSubscribe_submit, .c-font--mincho .communityButton, .c-font--mincho .communityItemHeader, .c-font--mincho .communityUrlHeader, .c-font--mincho .communityItemTitle, .c-font--mincho .review01__title, .c-font--mincho#MembershipPage .membership .heading, .c-font--mincho#MembershipPage .logo-text, .c-font--mincho#MembershipPage .membership .link, .c-font--mincho#MembershipPage .membership .edit, .c-font--mincho#MembershipPage .membership .mypage .customer-info, .c-font--mincho#MembershipPage .membership .mypage .definition-term {
+		font-family: 'Noto Serif JP', serif !important;
+	}
+	.c-font--display.c-font--mincho .header__logo, .c-font--display.c-font--mincho .gnav__menu .gnav__link, .c-font--display.c-font--mincho .mailmagazine__title .gnav__link, .c-font--display.c-font--mincho .gnav__menu--child a, .c-font--display.c-font--mincho .appsItemCategoryTag_child a, .c-font--display.c-font--mincho .appsItemCategoryTag_lowerchild a, .c-font--display.c-font--mincho .p-slide__title, .c-font--display.c-font--mincho .p-slide__btn a, .c-font--display.c-font--mincho .lower__title, .c-font--display.c-font--mincho .c-sec__title, .c-font--display.c-font--mincho .p-about__catch, .c-font--display.c-font--mincho .p-about__sub, .c-font--display.c-font--mincho#community .communityTitle, .c-font--display.c-font--mincho .p-concept__catch, .c-font--display.c-font--mincho .c-btn, .c-font--display.c-font--mincho .purchaseButton__btn, .c-font--display.c-font--mincho .salesPeriodModal__btn, .c-font--display.c-font--mincho .purchaseButtonModal__btn, .c-font--display.c-font--mincho .inquirySection .control-panel input#buttonLeave, .c-font--display.c-font--mincho #inquiryCompleteSection a, .c-font--display.c-font--mincho .mailMagazineSubscribe_submit, .c-font--display.c-font--mincho .communityButton, .c-font--display.c-font--mincho .review01__title, .c-font--display.c-font--mincho#MembershipPage .membership .heading, .c-font--display.c-font--mincho#MembershipPage .logo-text, .c-font--display.c-font--mincho#MembershipPage .membership .link, .c-font--display.c-font--mincho#MembershipPage .membership .edit, .c-font--display.c-font--mincho#MembershipPage .membership .mypage .customer-info, .c-font--display.c-font--mincho#MembershipPage .membership .mypage .definition-term {
+		font-family: 'Roboto Condensed', 'Noto Serif JP', serif !important;
+	}
+
+	/* layout ================= */
+	/* header -------- */
+	/* base menu */
+	.l-gnav #baseMenu ul li {
+		border: 1px solid var(--NavTextColor);
+				border: 1px solid var(--NavTextColorBgOn);
+					}
+	/* category menu */
+				.menu-btn__child::before,
+		.menu-btn__child::after {
+			background-color: var(--NavTextColorBgOn);
+		}
+		.gnav__menu--child a,
+		.appsItemCategoryTag_child a {
+			color: var(--NavTextColorBgOn);
+		}
+		.appsItemCategoryTag_lowerchild a::before {
+			background-color: var(--NavTextColorBgOn);
+		}
+					
+	/* item search */
+				.itemSearch__form {
+			border: 1px solid var(--NavTextColorBgOn);
+		}
+		.itemSearch__btn {
+			border-left: 1px solid var(--NavTextColorBgOn);
+		}
+			
+	/* sns */
+	
+
+	/* mail magazine */
+				.mailmagazine__txt {
+			color: var(--NavTextColorBgOn);
+		}
+		.mailMagazineSubscribe_field {
+			border: 1px solid var(--NavTextColorBgOn);
+		}
+		.mailMagazineSubscribe_submit {
+			border-left: 1px solid var(--NavTextColorBgOn);
+			color: var(--NavTextColorBgOn);
+		}
+		.mailMagazineSubscribe_confirm {
+			color: var(--NavTextColorBgOn);
+		}
+			
+	/* i18 */
+				#i18 > div::before {
+			color: var(--NavTextColorBgOn);
+		}
+		#i18 select {
+			border: 1px solid var(--NavTextColorBgOn);
+			color: var(--NavTextColorBgOn);
+		}
+			
+	/* col side fnav -------- */
+		
+	/* main -------- */
+	
+	/* footer -------- */
+		
+	/* project ================= */
+	/* お知らせバナーApp */
+				.informationBanner {
+			border-top: 1px solid var(--NewsAppBorder);
+			border-bottom: 1px solid var(--NewsAppBorder);
+		}
+						.informationBannerContainer {
+			justify-content: flex-start !important;
+		}
+			
+	
+	/* index -------- */
+		/* slide -------- */
+		.p-slide__listitem {
+			height: 100svh;
+		}
+				/* concept -------- */
+			.p-concept__wrap {
+				background-image: url(https://baseec-img-mng.akamaized.net/images/shop_front/lonich-official-ec/20a5fc73b1e0a202e49de21ca797e2de.jpeg);
+				background-size: cover;
+				background-position: center;
+			}
+						@media screen and (min-width: 960px) {
+				.p-concept__wrap {
+					background-image: url(https://baseec-img-mng.akamaized.net/images/shop_front/lonich-official-ec/f9f4968779be3f1f4c3fa9ab65f3b6cf.jpeg);
+				}
+			}
+									.p-concept__wrap .c-sec__title {
+			color: var(--ConceptTitleColor);
+			border-bottom: 1px solid var(--ConceptTitleColor);
+		}
+				
+			
+	
+	
+	
+	
+
+		</style>
+<meta name="cot:primaryColor" content="#B01F24"><meta name="cot:accentColor" content="#FFB800"><meta name="cot:textColor" content="#252525"><meta name="cot:lightTextColor" content="#ffffff"><meta name="cot:complementaryColor" content="#B01F24"><meta name="cot:titleColor" content="#B01F24">
+
+
+	<style>
+
+		.ABTEST-tipi .layout-headerTopBlock-i18nSelect {
+			flex-flow: column;
+			align-items: flex-start;
+		}
+		.ABTEST-tipi__element {
+			border: 1px solid #c2c8d2;
+			border-radius: 4px;
+			background: #fff;
+			width: 120px;
+			height: 27px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 10px;
+			font-family: Inter, sans-serif;
+			letter-spacing: 0;
+			font-weight: 700;
+			text-decoration: none;
+			color: #252525;
+			padding: 4px 0;
+		}
+
+		.ABTEST-tipi__inner {
+			display: flex;
+			font-family: inherit;
+		}
+
+		.ABTEST-tipi__element + * {
+			margin-top: 8px;
+		}
+
+		.ABTEST-tipi__element--c_powerd_by_base {
+			width: 120px;
+		}
+
+		.ABTEST-tipi__element--b_tipi_base {
+			width: 62px;
+		}
+
+		.ABTEST-tipi__element--d_open_by_base {
+			width: 132px;
+		}
+	</style>
+
+
+</head>
+
+<body id="homeCategory" class="">
+<img id="tracimg" style="display: none;">
+	<span id="max_page" style="display: none;">1</span>
+	<span id="next_page" style="display: none;">2</span>
+<header class="l-header type-bag">
+	<div class="gnav__overlay"></div>
+	<div class="header__wrap">
+		<nav class="l-gnav">
+
+			<div class="l-gnav__inner">
+
+								
+																					
+				
+					<script> ($=>{
+})(__BASE_JQUERY__); </script> <style> .mailMagazineSubscribe_submit{
+    cursor: pointer;
+} </style> 
+				</div>
+
+			</div>
+		</nav>
+	</div>
+</header>
+
+<div class="hover__overlay"></div>
+<div class="lower__header set-img"><h2 class="lower__title">Cup Character</h2></div>
+
+<main class="l-main">
+	
+				
+	<div class="c-col__wrap c-project__wrap">
+		<div class="c-col__side nav-sticky is-inview">
+			<nav class="l-gnav">
+																										<div class="itemSearch">
+					<form id="x_itemSearchForm" class="itemSearch__form" action="https://lonich.official.ec/search" method="get">
+						<input class="itemSearch__field" type="text" name="q" placeholder="SEARCH" value="">
+						<button class="itemSearch__btn" type="submit"><span id="x_iconSearch" class="si-search"><?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle class="svg__data" cx="10.12195" cy="10.12195" r="9.12195"/><line class="svg__data" x1="16.56098" y1="16.56098" x2="23" y2="23"/></svg></span></button>
+					</form>
+				</div>
+								<ul class="gnav__menu">
+										<li class="gnav__listitem gnav--category">
+						<div id="category-menu">
+							<p class="gnav__link">CATEGORY</p>
+							<div class="category-list"> <ul id="appsItemCategoryTag">
+                <li class="appsItemCategoryTag_child"> <a href="https://lonich.official.ec/categories/5114813" class="mainHeaderNavColor">Roast Level</a>
+                  <ul class="appsItemCategoryTag_lowerchild">  <li> <a href="https://lonich.official.ec/categories/5114818" class="mainHeaderNavColor appsItemCategoryTag_lowerLink">Light roast</a> </li>  
+                    <li> <a href="https://lonich.official.ec/categories/5114825" class="mainHeaderNavColor appsItemCategoryTag_lowerLink">Medium roast</a> </li>  
+                    <li> <a href="https://lonich.official.ec/categories/5114828" class="mainHeaderNavColor appsItemCategoryTag_lowerLink">Dark roast</a> </li>  </ul>  </li>  
+                <li class="appsItemCategoryTag_child"> <a href="https://lonich.official.ec/categories/5114829" class="mainHeaderNavColor">Region</a>  
+                  <ul class="appsItemCategoryTag_lowerchild">  <li> <a href="https://lonich.official.ec/categories/5114832" class="mainHeaderNavColor appsItemCategoryTag_lowerLink">Asia / Oceania</a> </li>  
+                    <li> <a href="https://lonich.official.ec/categories/5114834" class="mainHeaderNavColor appsItemCategoryTag_lowerLink">Latin America</a> </li>  <li> <a href="https://lonich.official.ec/categories/5114835" class="mainHeaderNavColor appsItemCategoryTag_lowerLink">Africa</a> </li>  </ul>  </li>  
+                  <li class="appsItemCategoryTag_child"> <a href="https://lonich.official.ec/categories/5221482" class="mainHeaderNavColor">Brewing Equipment</a>  <ul class="appsItemCategoryTag_lowerchild">  <li> <a href="https://lonich.official.ec/categories/5221483" class="mainHeaderNavColor appsItemCategoryTag_lowerLink">LILI</a> </li>  <li> <a href="https://lonich.official.ec/categories/5221484" class="mainHeaderNavColor appsItemCategoryTag_lowerLink">MHW-3BOMBER</a> </li>  <li> <a href="https://lonich.official.ec/categories/5801878" class="mainHeaderNavColor appsItemCategoryTag_lowerLink">NANA COFFEE ROASTERS</a> </li>  </ul>  </li>  <li class="appsItemCategoryTag_child"> <a href="https://lonich.official.ec/categories/5730790" class="mainHeaderNavColor">GIFT/SET</a>  </li>  </ul>  </div>
+						</div>
+					</li>
+								
+				</ul>
+				<ul class="sns__list">
+																				<li><a href="https://www.instagram.com/lonich_jp" target="_blank" rel="noopener"><img src="/img/shop/igicon.png"></a></li>
+																																		</ul>
+								<div id="i18" class="clearfix">
+		<div class="currency">
+	<form action="https://lonich.official.ec/i18n/i18n_user_currencies/change_currency?back=http%3A%2F%2Flonich.official.ec%2Fcategories%2F5133634" method="post" accept-charset="utf-8"><div style="display:none;"><input type="hidden" name="_method" value="POST"/><input type="hidden" name="data[_Token][key]" value="f48f187f2b633d25909c5ecc84087e7329241864889cc62b1b4e0cf6c0e1efe6d642ee0772db95561281c81c87c237134084cb083fa147f635d1ca8ccdced850" id="Token454635423" autocomplete="off"/></div><input type="hidden" name="data[UserCurrency][shop_id]" value="lonich-official-ec" id="UserCurrencyShopId"/><div class="input select"><select name="data[UserCurrency][currency_code]" class="x_i18nSelectBox">
+<option value="JPY" selected="selected">JPY</option>
+<option value="USD">USD</option>
+<option value="EUR">EUR</option>
+<option value="CNY">CNY</option>
+<option value="HKD">HKD</option>
+<option value="KRW">KRW</option>
+<option value="THB">THB</option>
+<option value="TWD">TWD</option>
+</select></div><div style="display:none;"><input type="hidden" name="data[_Token][fields]" value="c89f18995f09bc11e845a13195fbb4261eb59e4c%3AUserCurrency.shop_id" id="TokenFields1018588024" autocomplete="off"/><input type="hidden" name="data[_Token][unlocked]" value="" id="TokenUnlocked631857699" autocomplete="off"/></div></form>	</div>
+	</div>
+			</nav>
+		</div>
+		<div class="c-col__main">
+					
+				
+								<div class="c-sec__wrap p-item__wrap is-inview">
+											
+						
+													 <ul class="breadcrumb"> <li class="breadcrumb__child" class="breadcrumb__link"><a href="https://lonich.official.ec/" class="breadcrumb__link">Home</a></li>   <li class="breadcrumb__child"><span class="breadcrumb__notlink">Cup Character</span></li>   </ul>  
+						
+																										<ul class="category-child__list">
+																<li class="category-child__listitem"><a href="https://lonich.official.ec/categories/5133640" class="category-child__link">SOFT/MILD</a></li>
+																<li class="category-child__listitem"><a href="https://lonich.official.ec/categories/5133647" class="category-child__link">WILD/EXOTIC</a></li>
+																<li class="category-child__listitem"><a href="https://lonich.official.ec/categories/5133644" class="category-child__link">CURIOUS/SCARCITY</a></li>
+															</ul>
+																			
+						<div id="itemIndex" class="p-item__list">
+														<div class="p-item__listitem">
+								<div class="p-item__img">
+																			 <img src="https://base-ec2.akamaized.net/images/free_word_label/ed6a1da9c24453b29746757aa10116c9.jpg" class="label_image list">  
+																		<figure class="img__wrap"><a href="https://lonich.official.ec/items/85909706"><img loading="lazy" src="https://baseec-img-mng.akamaized.net/images/item/origin/1bcc491f2dea8070a84fa7e654a8b60a.png?imformat=generic&amp;q=90&amp;im=Resize,width=640,type=normal" alt="Colombia - La Esperanza/Natural/Laurina/Light" title="Colombia - La Esperanza/Natural/Laurina/Light" class="image-resize"></a></figure>
+								</div>
+								<a class="p-item__contents" href="https://lonich.official.ec/items/85909706">
+									<h2 class="p-item__title">Colombia - La Esperanza/Natural/Laurina/Light</h2>
+									<ul class="p-item__detail">
+																				<!-- 定価 -->
+										<li class="p-item__price">¥6,800</li>
+																													</ul>
+																																					
+																																																							</a>
+							</div>
+														<div class="p-item__listitem">
+								<div class="p-item__img">
+																			 <img src="https://base-ec2.akamaized.net/images/free_word_label/ed6a1da9c24453b29746757aa10116c9.jpg" class="label_image list">  
+																		<figure class="img__wrap"><a href="https://lonich.official.ec/items/85909522"><img loading="lazy" src="https://baseec-img-mng.akamaized.net/images/item/origin/a6b6da597195093f45a750a648d42dbf.png?imformat=generic&amp;q=90&amp;im=Resize,width=640,type=normal" alt="Indonesia-Hans/Sukasari - West Java/Typica/Anaerobic Natural/Light" title="Indonesia-Hans/Sukasari - West Java/Typica/Anaerobic Natural/Light" class="image-resize"></a></figure>
+								</div>
+								<a class="p-item__contents" href="https://lonich.official.ec/items/85909522">
+									<h2 class="p-item__title">Indonesia-Hans/Sukasari - West Java/Typica/Anaerobic Natural/Light</h2>
+									<ul class="p-item__detail">
+																				<!-- 定価 -->
+										<li class="p-item__price">¥3,200</li>
+																													</ul>
+																																					
+																																																							</a>
+							</div>
+														<div class="p-item__listitem">
+								<div class="p-item__img">
+																			 <img src="https://base-ec2.akamaized.net/images/free_word_label/ed6a1da9c24453b29746757aa10116c9.jpg" class="label_image list">  
+																		<figure class="img__wrap"><a href="https://lonich.official.ec/items/85909215"><img loading="lazy" src="https://baseec-img-mng.akamaized.net/images/item/origin/9a4c1190bedfd294162db2c3bebec984.png?imformat=generic&amp;q=90&amp;im=Resize,width=640,type=normal" alt="Ethiopia-Nigussie Gemeda - Morke/COE2020 #1 Producer/74158/Natural/Light" title="Ethiopia-Nigussie Gemeda - Morke/COE2020 #1 Producer/74158/Natural/Light" class="image-resize"></a></figure>
+								</div>
+								<a class="p-item__contents" href="https://lonich.official.ec/items/85909215">
+									<h2 class="p-item__title">Ethiopia-Nigussie Gemeda - Morke/COE2020 #1 Producer/74158/Natural/Light</h2>
+									<ul class="p-item__detail">
+																				<!-- 定価 -->
+										<li class="p-item__price">¥2,800</li>
+																													</ul>
+																																					
+																																																							</a>
+							</div>
+														<div class="p-item__listitem">
+								<div class="p-item__img">
+																			 <img src="https://base-ec2.akamaized.net/images/free_word_label/ed6a1da9c24453b29746757aa10116c9.jpg" class="label_image list">  
+																		<figure class="img__wrap"><a href="https://lonich.official.ec/items/85908947"><img loading="lazy" src="https://baseec-img-mng.akamaized.net/images/item/origin/b822aa8bd7b21461bcc43637167c0793.png?imformat=generic&amp;q=90&amp;im=Resize,width=640,type=normal" alt="Colombia - Finca Las Flores/Washed/Geisha/Light" title="Colombia - Finca Las Flores/Washed/Geisha/Light" class="image-resize"></a></figure>
+								</div>
+								<a class="p-item__contents" href="https://lonich.official.ec/items/85908947">
+									<h2 class="p-item__title">Colombia - Finca Las Flores/Washed/Geisha/Light</h2>
+									<ul class="p-item__detail">
+																				<!-- 定価 -->
+										<li class="p-item__price">¥4,500</li>
+																													</ul>
+																																					
+																																																							</a>
+							</div>
+														<div class="p-item__listitem">
+								<div class="p-item__img">
+																			 
+																		<figure class="img__wrap"><a href="https://lonich.official.ec/items/84810007"><img loading="lazy" src="https://baseec-img-mng.akamaized.net/images/item/origin/e82882f9ebfe4bd4edff2f63c7d46343.png?imformat=generic&amp;q=90&amp;im=Resize,width=640,type=normal" alt="Colombia - Finca El Oasis/Oak box fermentation Washed/Geisha/Light" title="Colombia - Finca El Oasis/Oak box fermentation Washed/Geisha/Light" class="image-resize"></a></figure>
+								</div>
+								<a class="p-item__contents" href="https://lonich.official.ec/items/84810007">
+									<h2 class="p-item__title">Colombia - Finca El Oasis/Oak box fermentation Washed/Geisha/Light</h2>
+									<ul class="p-item__detail">
+																				<!-- 定価 -->
+										<li class="p-item__price">¥4,500</li>
+																													</ul>
+																																					
+																																																							</a>
+							</div>
+														<div class="p-item__listitem">
+								<div class="p-item__img">
+																			 
+																		<figure class="img__wrap"><a href="https://lonich.official.ec/items/84289457"><img loading="lazy" src="https://baseec-img-mng.akamaized.net/images/item/origin/408c896c710f77c3e2d326a9fef6530b.png?imformat=generic&amp;q=90&amp;im=Resize,width=640,type=normal" alt="Colombia  Mahusa/Wush Wush/Fermentation 96h - Natural/Light" title="Colombia  Mahusa/Wush Wush/Fermentation 96h - Natural/Light" class="image-resize"></a></figure>
+								</div>
+								<a class="p-item__contents" href="https://lonich.official.ec/items/84289457">
+									<h2 class="p-item__title">Colombia  Mahusa/Wush Wush/Fermentation 96h - Natural/Light</h2>
+									<ul class="p-item__detail">
+																				<!-- 定価 -->
+										<li class="p-item__price">¥4,500</li>
+																													</ul>
+																																					
+																																																							</a>
+							</div>
+														<div class="p-item__listitem">
+								<div class="p-item__img">
+																			 
+																		<figure class="img__wrap"><a href="https://lonich.official.ec/items/84289937"><img loading="lazy" src="https://baseec-img-mng.akamaized.net/images/item/origin/2531b096b471acc7f6fe4e4d37221b0a.png?imformat=generic&amp;q=90&amp;im=Resize,width=640,type=normal" alt="Colombia  Santa Barbara - Nelson Reinel/Geisha/Natural/Light" title="Colombia  Santa Barbara - Nelson Reinel/Geisha/Natural/Light" class="image-resize"></a></figure>
+								</div>
+								<a class="p-item__contents" href="https://lonich.official.ec/items/84289937">
+									<h2 class="p-item__title">Colombia  Santa Barbara - Nelson Reinel/Geisha/Natural/Light</h2>
+									<ul class="p-item__detail">
+																				<!-- 定価 -->
+										<li class="p-item__price">¥4,500</li>
+																													</ul>
+																																					
+																																																							</a>
+							</div>
+														<div class="p-item__listitem">
+								<div class="p-item__img">
+																			 
+																		<figure class="img__wrap"><a href="https://lonich.official.ec/items/83762678"><img loading="lazy" src="https://baseec-img-mng.akamaized.net/images/item/origin/70c00f9a18044d8d2df56b26cb619209.png?imformat=generic&amp;q=90&amp;im=Resize,width=640,type=normal" alt="El Salvador-Finca Don Jaime/Pacamara/Ananerobic Natural/Light" title="El Salvador-Finca Don Jaime/Pacamara/Ananerobic Natural/Light" class="image-resize"></a></figure>
+								</div>
+								<a class="p-item__contents" href="https://lonich.official.ec/items/83762678">
+									<h2 class="p-item__title">El Salvador-Finca Don Jaime/Pacamara/Ananerobic Natural/Light</h2>
+									<ul class="p-item__detail">
+																				<!-- 定価 -->
+										<li class="p-item__price">¥3,200</li>
+																													</ul>
+																																					
+																																																							</a>
+							</div>
+														<div class="p-item__listitem">
+								<div class="p-item__img">
+																			 
+																		<figure class="img__wrap"><a href="https://lonich.official.ec/items/82112362"><img loading="lazy" src="https://baseec-img-mng.akamaized.net/images/item/origin/d449c64ecb6d1506b5438b106321a354.png?imformat=generic&amp;q=90&amp;im=Resize,width=640,type=normal" alt="China Yunnan Simao/Anaerobic Honey Process-Infused Strawberry/Light" title="China Yunnan Simao/Anaerobic Honey Process-Infused Strawberry/Light" class="image-resize"></a></figure>
+								</div>
+								<a class="p-item__contents" href="https://lonich.official.ec/items/82112362">
+									<h2 class="p-item__title">China Yunnan Simao/Anaerobic Honey Process-Infused Strawberry/Light</h2>
+									<ul class="p-item__detail">
+																				<!-- 定価 -->
+										<li class="p-item__price">¥3,200</li>
+																													</ul>
+																																					
+																																																							</a>
+							</div>
+														<div class="p-item__listitem">
+								<div class="p-item__img">
+																			 
+																		<figure class="img__wrap"><a href="https://lonich.official.ec/items/85910018"><img loading="lazy" src="https://baseec-img-mng.akamaized.net/images/item/origin/2ee096327d8e1524765986d04e8ff5bf.png?imformat=generic&amp;q=90&amp;im=Resize,width=640,type=normal" alt="Burundi-Muramba Washing Station/Swiss Water Decaf/Washed/Medium" title="Burundi-Muramba Washing Station/Swiss Water Decaf/Washed/Medium" class="image-resize"></a></figure>
+								</div>
+								<a class="p-item__contents" href="https://lonich.official.ec/items/85910018">
+									<h2 class="p-item__title">Burundi-Muramba Washing Station/Swiss Water Decaf/Washed/Medium</h2>
+									<ul class="p-item__detail">
+																				<!-- 定価 -->
+										<li class="p-item__price">¥2,800</li>
+																													</ul>
+																																					
+																																																							</a>
+							</div>
+														<div class="p-item__listitem">
+								<div class="p-item__img">
+																			 
+																		<figure class="img__wrap"><a href="https://lonich.official.ec/items/83741479"><img loading="lazy" src="https://baseec-img-mng.akamaized.net/images/item/origin/c6645b5488cd4d97505a87f50ae6063e.jpg?imformat=generic&amp;q=90&amp;im=Resize,width=640,type=normal" alt="Colombia Triangulation Set 【Geisha&amp;Wush Wush】" title="Colombia Triangulation Set 【Geisha&amp;Wush Wush】" class="image-resize"></a></figure>
+								</div>
+								<a class="p-item__contents" href="https://lonich.official.ec/items/83741479">
+									<h2 class="p-item__title">Colombia Triangulation Set 【Geisha&amp;Wush Wush】</h2>
+									<ul class="p-item__detail">
+																				<!-- 定価 -->
+										<li class="p-item__price">¥10,000</li>
+																													</ul>
+																																					
+																																																							</a>
+							</div>
+														<div class="p-item__listitem">
+								<div class="p-item__img">
+																			 
+																		<figure class="img__wrap"><a href="https://lonich.official.ec/items/84868143"><img loading="lazy" src="https://baseec-img-mng.akamaized.net/images/item/origin/4b30a18b3c726c095f125fd17fb34a98.png?imformat=generic&amp;q=90&amp;im=Resize,width=640,type=normal" alt="Lonich, サブスクリプションサービス【135g×3month】" title="Lonich, サブスクリプションサービス【135g×3month】" class="image-resize"></a></figure>
+								</div>
+								<a class="p-item__contents" href="https://lonich.official.ec/items/84868143">
+									<h2 class="p-item__title">Lonich, サブスクリプションサービス【135g×3month】</h2>
+									<ul class="p-item__detail">
+																				<!-- 定価 -->
+										<li class="p-item__price">¥9,072</li>
+																													</ul>
+																																					
+																																								<p class="lottery">Raffle</p>
+																																				</a>
+							</div>
+													</div>
+						<p id="js-more" class="c-btn__wrap c-fill"><a class="c-btn" href="#">View more</a></p>
+						<div id="loading"></div>
+					
+									</div>
+						
+							</div>
+	</div>
+	</main>
+
+<footer class="l-footer">
+	<p class="p-copyright">© Lonich, | コーヒー体験をデザインする</p>
+	<div id="baseMenu"> <ul class="clearfix"> <li class="base" ><a target="_blank"  href="https://thebase.com?from=lonich-official-ec&p=shop"><img src="/img/shop/base.png" alt="ネットショップを開設するならBASE" title="BASE" height="30"></a></li> <li class="cart"><a href="https://lonich.official.ec/cart/add/lonich-official-ec"><img src="/img/shop/cart.png" alt="shopping cart" height="30"></a></li> </ul> </div> 
+</footer>
+
+</body>
+</html>

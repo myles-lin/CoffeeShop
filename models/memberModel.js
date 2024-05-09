@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const memberSchema = new mongoose.Schema({
-    username : {
+    account : {
         type : String,
         required : true,
         unique : true

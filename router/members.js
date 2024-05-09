@@ -6,13 +6,23 @@ const memberModel = require("../models/memberModel");
 // const db = connectDB();
 
 router.get("/", (req, res) => {
-    res.send("This is member page.");
+    console.log(req.session);
+    if (!req.session.userInfo || req.session.userInfo.isLogined !== true) {
+        res.send("Get Out!!!");
+    } else {
+        let path = "../views/member.html"
+        res.render("index", { path : path });
+    }
 });
-// connectDB();
+
+router.get("/signout", (req, res) => {
+    req.session.destroy();
+    res.redirect("/");
+});
 
 router.get("/api", async (req, res) => {
     const db = connectDB();
-    const result = await memberModel.findOne({username:"def"});
+    const result = await memberModel.findOne({account:"def"});
     res.send({"member": result});
 });
 
