@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="../css/home_style.css">
 </head>
 <body>
-    <h1>管理者介面</h1>
+    <h1>新增商品</h1>
     <ul>
         <li>11</li>
         <li>11</li>
     </ul>
-    <form action="/adminAuth/products" method="POST" class="form-group">
+    <form action="/products" method="POST" class="form-group">
         <div>
             <label for="name">Name</label>
             <input type="text" id="password" name="name" required>
@@ -59,13 +59,8 @@
         <button type="submit">Add</button>
     </form>
 
-    <form method="GET" action="/adminAuth/test">
-        <select id="region" name="region">
-            <option value="none">none</option>
-            <option value="asia">asia</option>
-            <option value="latin america">latin america</option>
-            <option value="africa">africa</option>
-        </select>
+    <form method="POST" action="/products/test">
+
     <button type="submit">Add</button>
     </form>
 </body>
