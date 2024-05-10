@@ -28,11 +28,11 @@ app.use(session({
 }));
 
 // 引入 /router/members.js
-const membersRouter = require("./router/members");
 const registerRouter = require("./router/register");
-const booksRouter = require("./router/books");
-const aboutRouter = require("./router/about");
 const adminRouter = require("./router/adminAuth");
+const membersRouter = require("./router/members");
+const productsRouter = require("./router/products");
+const booksRouter = require("./router/books");
 
 app.get("/", (req, res) => {
     let path = "";
@@ -76,10 +76,10 @@ app.get("/error", (req, res) => {
 
 // 將 /members 的 requests, 導入到 booksRouter 處理
 app.use("/register", registerRouter);
-app.use("/members", membersRouter);
-app.use("/books", booksRouter);
-app.use("/about", aboutRouter);
 app.use("/adminAuth", adminRouter);
+app.use("/members", membersRouter);
+app.use("/products", productsRouter);
+app.use("/books", booksRouter);
 
 app.listen(portNum, ()=>{
     console.log(`Server is running at localhost:${portNum}`);
