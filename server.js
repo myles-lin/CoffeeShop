@@ -35,14 +35,14 @@ const productsRouter = require("./router/products");
 const booksRouter = require("./router/books");
 
 app.get("/", (req, res) => {
-    let path = "";
     console.log(req.session);
-    res.render("index", { path : null });
+    res.render("index.html");
 });
 
 app.get("/login", (req, res) => {
-    let path = "../views/login.html";
-    res.render("index", { path : path });
+    // let path = "../views/login.html";
+    // res.render("index", { path : path });
+    res.render("login.html");
 });
 
 app.post("/login", async (req, res, next) => {
@@ -64,7 +64,7 @@ app.post("/login", async (req, res, next) => {
     },
     validator.setSessionInfo,
     (req, res) => {
-        res.send("Welcome");
+        res.redirect("/");
     }
 );
 

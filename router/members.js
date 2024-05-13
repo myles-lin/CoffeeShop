@@ -10,8 +10,7 @@ router.get("/", (req, res) => {
     if (!req.session.userInfo || req.session.userInfo.isLogined !== true) {
         res.send("Get Out!!!");
     } else {
-        let path = "../views/member.html"
-        res.render("index", { path : path });
+        res.render("member.html");
     }
 });
 

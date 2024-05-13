@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>錯誤頁面</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Code Coffee</title>
+    <link rel="stylesheet" href="../css/style.css" type="text/css">
 </head>
 <body>
     <header>
@@ -15,8 +15,8 @@
                 <li>
                     <a href="/adminAuth">MANAGE</a>
                     <ul>
-                        <li><a href="/products">Products</a></li>
-                        <li><a target="display-frame" href="/products" >Search Products</a></li>
+                        <li><a href="/products/add">Add Products</a></li>
+                        <li><a href="/products">Search Products</a></li>
                         <li><a href="#">Orders</a></li>
                         <li><a href="#">Reviews</a></li>
                     </ul>
@@ -56,11 +56,15 @@
             </div>
 
             <div class="row flex-2">
-                <div class="container">
-                    <h2>發生錯誤</h1>
-                    <div class="error-message">{{ message }}</div>
-                    <a href="/">回首頁</a>
-                </div>
+                    <tr>
+                        <th>name</th>
+                        <th>category</th>
+                        <th>roastLevel</th>
+                        <th>region</th>
+                        <th>quantity</th>
+                        <th>price</th>
+                        <th>content</th>
+                    </tr>
                 <!-- <iframe name="display-frame" align="center" width="100%" height="1000" frameborder="no" scrolling="yes"></iframe> -->
                 <!-- <% if (path === null) { %>
                     <iframe align="center" width="100%" height="1000" src="../views/member.html"  frameborder="no" scrolling="yes"></iframe>
@@ -72,5 +76,9 @@
         </div>
     </nav>
     </main>
+<footer>
+    <p>ddd</p>
+</footer>
+
 </body>
-</html>
+</html> 

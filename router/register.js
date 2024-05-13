@@ -15,7 +15,6 @@ router.post("/", async (req, res) => {
 
     let result = await memberModel.findOne({ account : account });
     if (result !== null) {
-        // res.send("信箱已被註冊過，請更換其他信箱。");
         res.redirect("/error?msg=信箱已經被註冊。");
     } else {
         const member = new memberModel({

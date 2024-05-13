@@ -4,7 +4,132 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Code Coffee</title>
+    <link rel="stylesheet" href="../css/style.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+<body>
+    <header>
+        <h1 style="position: absolute;left: 120px;top: 0;line-height: 80px;">扣咖啡</h1>
+
+        <nav>
+            <ul>
+                <li>
+                    <a href="/adminAuth">MANAGE</a>
+                    <ul>
+                        <li><a href="/products">Add Products</a></li>
+                        <li><a href="/products" >Search Products</a></li>
+                        <li><a href="#">Orders</a></li>
+                        <li><a href="#">Reviews</a></li>
+                    </ul>
+                </li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/members">MEMBER</a></li>
+                <li><a href="#">CART</a></li>
+                <li><a href="/login">SIGNIN</a></li>
+                <li><a href="/members/signout">SIGNOUT</a></li>
+             </ul>
+       </nav>
+    </header>
+    <main>
+    <nav>
+    <div class="container">
+        <div class="d-flex outer">
+            <div class="row">
+                <div id="category-menu">
+                    <p class="gnav__link">CATEGORY</p>
+                        <div class="category-list"> 
+                            <ul>
+                                <li> <a href="">Roast Level</a>
+                                    <ul><li><a href="">Light roast</a> </li>  
+                                        <li> <a href="">Medium roast</a> </li>  
+                                        <li> <a href="">Dark roast</a> </li>  </ul>  </li>  
+                                <li> <a href="">Region</a>  
+                                    <ul><li> <a href="">Asia / Oceania</a> </li>  
+                                        <li> <a href="">Latin America</a> </li>  
+                                        <li> <a href="">Africa</a> </li>  </ul>  </li>  
+                                <li> <a href="">Brewing Equipment</a>  
+                                    <ul><li> <a href="">LILI</a> </li>  
+                                        <li> <a href="">MHW-3BOMBER</a> </li>  
+                                        <li> <a href="">NANA COFFEE ROASTERS</a> </li>  </ul>  </li>    
+                            </ul>
+                        </div>        
+                </div>
+            </div>
+
+            <div class="row flex-2">
+                <form action="/products" method="POST" id="form-product" class="form-group">
+                    <h1>新增商品</h1>
+                    <div>
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div>
+                        <label for="category">Category</label>
+                        <select id="category" name="category" required>
+                            <option value="coffee beans" selected>coffee beans</option>
+                            <option value="brewing equipment">brewing equipment</option>
+                            <option value="grinder">grinder</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="category">Roast Level</label>
+                        <select id="roastlevle" name="roastlevle">
+                            <option value="none" selected>none</option>
+                            <option value="asia">light roast</option>
+                            <option value="latin america">medium roast</option>
+                            <option value="africa">dark roast</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="category">Region</label>
+                        <select id="region" name="region">
+                            <option value="none" selected>none</option>
+                            <option value="asia">asia</option>
+                            <option value="latin america">latin america</option>
+                            <option value="africa">africa</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="category">Quantity</label>
+                        <input type="number" id="quantity" name="quantity" min="1" required>
+                    </div>
+                    <div>
+                        <label for="category">Price</label>
+                        <input type="number" id="price" name="price" min="1" required>
+                    </div>
+                    <div>
+                        <label for="content">Content</label><br>
+                        <textarea class="content-box" name="content" rows="5" cols="40">你的留言</textarea>
+                    </div>
+                    <button class="btn" type="submit"">submit</button>
+                    <div id="btn"></div>
+                </form>
+                <!-- <form method="POST" action="/products/test">
+                <button type="submit">Upload raw data</button>
+                </form> -->
+            </div>
+        </div>
+        </div>
+    </nav>
+    </main>
+<footer>
+    <p>ddd</p>
+</footer>
+
+</body>
+</html> 
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
     <link rel="stylesheet" href="../css/home_style.css">
 </head>
 <body>
@@ -64,4 +189,4 @@
     <button type="submit">Add</button>
     </form>
 </body>
-</html>
+</html> -->

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Coffee</title>
-    <link rel="stylesheet" href="../css/home_style.css" type="text/css">
+    <link rel="stylesheet" href="../css/style.css" type="text/css">
     <!-- <link rel="import" href="../views/login.html" id="page1"> -->
 </head>
 <body>
@@ -17,7 +17,8 @@
                 <li>
                     <a href="/adminAuth">MANAGE</a>
                     <ul>
-                        <li><a href="/products">Products</a></li>
+                        <li><a href="/products">Add Products</a></li>
+                        <li><a target="display-frame" href="/products" >Search Products</a></li>
                         <li><a href="#">Orders</a></li>
                         <li><a href="#">Reviews</a></li>
                     </ul>
@@ -30,18 +31,6 @@
              </ul>
        </nav>
     </header>
-
-    <!-- <header>
-        <h1 style="position: absolute;left: 120px;top: 0;line-height: 80px;">扣咖啡</h1>
-        <ul>
-            <li><a href="/adminAuth">MANAGE</a></li>
-            <li><a href="/">HOME</a></li>
-            <li><a href="/members">MEMBER</a></li>
-            <li><a href="">CART</a></li>
-            <li><a href="/login">SIGNIN</a></li>
-            <li><a href="/members/signout">SIGNOUT</a></li>
-        </ul>
-    </header> -->
     <main>
     <nav>
     <div class="container">
@@ -69,11 +58,44 @@
             </div>
 
             <div class="row flex-2">
-                <% if (path === null) { %>
-                    <iframe align="center" width="100%" height="1000" src="../views/member.html"  frameborder="no" scrolling="yes"></iframe>
-                <% } else { %>
-                    <iframe align="center" width="100%" height="1000" src="<%= path %>"  frameborder="no" scrolling="yes"></iframe>
-                <% } %>   
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>RoastLevel</th>
+                        <th>Region</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Content</th>
+                        <th>Delete</th>
+                    </tr>
+                    <% products.forEach(function(product, index) { %>
+                    <tr>
+                        <td><%= product.name %></td>
+                        <td><%= product.category %></td>
+                        <td><%= product.roastLevel %></td>
+                        <td><%= product.region %></td>
+                        <td><%= product.quantity %></td>
+                        <td><%= product.price %></td>
+                        <td><%= product.content %></td>
+                        <td>
+                            <form action="/products/id" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" name="id" value="<%= product._id %>">
+                            <span>Delete</span>
+                            </button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }); %>
+                </table>
+                <!-- <ul>
+                    <% products.forEach(function(product, index) { %>
+                        <li>
+                            index: <%= index+1 %> name: <%= product.name %> category: <%= product.category %>
+                        </li>
+                    <% }); %>
+                    </ul> -->
             </div>
         </div>
         </div>
@@ -84,4 +106,4 @@
 </footer>
 
 </body>
-</html> 
+</html>
