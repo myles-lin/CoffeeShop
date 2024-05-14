@@ -7,6 +7,29 @@
     <title>Code Coffee</title>
     <link rel="stylesheet" href="../css/style.css" type="text/css">
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script>
+        $(function(){
+            <% products.forEach(function(product, index) { %>
+            $("#btn_<%= index %>").click(() => {
+                var data = { id : $("#product_id_<%= index %>").val()}; 
+                alert(data.id);
+                $.ajax({
+                    url  : "/products/id",
+                    type : "DELETE",
+                    data : {id: data.id},
+                    dataType: "json"
+                })
+                .then(res => {
+                    console.log(res);
+                    window.location.reload();
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+            });
+            <% }); %>
+        });
+    </script>
 </head>
 <body>
     <header>
@@ -78,6 +101,13 @@
                         <td><%= product.quantity %></td>
                         <td><%= product.price %></td>
                         <td><%= product.content %></td>
+                        <td>
+                            <input type="hidden" id="product_id_<%= index %>" name="id" value="<%= product._id %>">
+                            <button id="btn_<%= index %>" type="button">
+                            <span>Delete</span>
+                            </button>
+                            </form>
+                        </td>
                     </tr>
                     <% }); %>
                 </table>

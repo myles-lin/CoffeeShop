@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
     let product = await productModel.find();
 
     // let path = "../views/products_search.ejs";
-    res.render("products_search", { products : product });
+    res.render("products_manage", { products : product });
     
     // console.log(result);
     // let product = res.json(result);
@@ -22,49 +22,55 @@ router.get("/", async (req, res) => {
     // if (!req.session.userInfo ||req.session.userInfo.name !== "admin" || req.session.userInfo.isLogined !== true) {
     //     res.send("Get Out!!!");
     // } else {
-    //     let path = "../views/products.html";
+    //     let path = "../views/products_add.html";
     //     res.render("index", { path : path });
     // }
 });
 
-router.get("/:", (req, res) => {
-    res.redirect
+router.get("/search", async (req, res) => {
+    const db = connectDB();
+    console.log(req.query);
+    const data = req.query;
+    let result = await productModel.find(data);
+    if (result.length === 0) {
+        res.send("There's no items for sale.");
+    } else {
+        res.render("products_search",{ products : result });
+    }
 });
 
 router.post("/", async (req, res) => {
     const db = connectDB();
-    let data = req.body;
-    // console.log(data);
+    const data = req.body;
+    console.log(data);
     let result = await productModel.findOne({ name : req.body.name });
     if (result !== null) {
         res.redirect("/error?msg=商品名稱重複，請重新檢查。");
     } else {
-        let obj = {
-            name : req.body.name,
-            category : req.body.category,
-            roastLevel : req.body.roastLevel,
-            region : req.body.region,
-            quantity : req.body.quantity,
-            price : req.body.price,
-            content : req.body.content
-        };
-        let result = await productModel.insertMany(obj);
+        // let obj = { 
+        //     name : req.body.name,
+        //     category : req.body.category,
+        //     roastLevel : req.body.roastLevel,
+        //     region : req.body.region,
+        //     quantity : req.body.quantity,
+        //     price : req.body.price,
+        //     content : req.body.content
+        // };
+        let result = await productModel.insertMany(data);
         console.log(result);
-        res.send(req.body.name);
+        res.render("products_add.html");
     };
 });
 
 router.delete("/:id", async (req, res) => {
     const db = connectDB();
-    // let id = req.params.id;
-    console.log(req.params.id);
-    const result = await productModel.deleteOne({_id : req.params.id});
+    const result = await productModel.deleteOne({_id : req.body.id});
     console.log(result);
     res.json(result);
 });
 
 router.get("/add", (req, res) => {
-    res.render("products.html");
+    res.render("products_add.html");
 });
 
 

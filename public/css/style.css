@@ -172,8 +172,18 @@ h2 {
     margin-bottom: 20px;
 }
 
-a {
-    
+li .left_c1 {
+    cursor: pointer;
+}
+
+input[type="submit"] {
+    margin: 0;
+    border: 0px;
+    font-size: 20px;
+    font-family: sans-serif;  /* 與 default 字體同步 */
+    color: #333;
+    background-color: #d3d7d8;
+    cursor: pointer;
 }
 
 .error-message {

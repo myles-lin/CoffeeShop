@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Coffee</title>
     <link rel="stylesheet" href="../css/style.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 <body>
     <header>
@@ -16,7 +17,7 @@
                     <a href="/adminAuth">MANAGE</a>
                     <ul>
                         <li><a href="/products/add">Add Products</a></li>
-                        <li><a href="/products">Search Products</a></li>
+                        <li><a href="/products">Manage Products</a></li>
                         <li><a href="#">Orders</a></li>
                         <li><a href="#">Reviews</a></li>
                     </ul>
@@ -39,9 +40,9 @@
                         <div class="category-list"> 
                             <ul>
                                 <li> <a href="">Roast Level</a>
-                                    <ul><li><a href="">Light roast</a> </li>  
-                                        <li> <a href="">Medium roast</a> </li>  
-                                        <li> <a href="">Dark roast</a> </li>  </ul>  </li>  
+                                    <ul><li><form action="/products/search" method="GET"> <input type="hidden" name="roastLevel" value="light roast"/> <input type="submit" value="Light roast"> </form></li>  
+                                        <li><form action="/products/search" method="GET"> <input type="hidden" name="roastLevel" value="medium roast"/> <input type="submit" value="Medium roast"> </form></li>  
+                                        <li><form action="/products/search" method="GET"> <input type="hidden" name="roastLevel" value="dark roast"/> <input type="submit" value="Dark roast"></form>  </li>  </ul>  </li>  
                                 <li> <a href="">Region</a>  
                                     <ul><li> <a href="">Asia / Oceania</a> </li>  
                                         <li> <a href="">Latin America</a> </li>  

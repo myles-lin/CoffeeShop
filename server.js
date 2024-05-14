@@ -40,8 +40,6 @@ app.get("/", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-    // let path = "../views/login.html";
-    // res.render("index", { path : path });
     res.render("login.html");
 });
 
