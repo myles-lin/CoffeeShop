@@ -5,11 +5,18 @@ const connectDB = require("../utils/db");
 const memberModel = require("../models/memberModel");
 // const db = connectDB();
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
     console.log(req.session);
     if (!req.session.userInfo || req.session.userInfo.isLogined !== true) {
         res.send("Get Out!!!");
     } else {
+        const db = connectDB();
+        const userInfo = await memberModel.findOne({ account : req.session.userInfo.name });
+        console.log(userInfo);
+        console.log(userInfo.account);
+        console.log(userInfo.password);
+        console.log(userInfo.nickname);
+
         res.render("member.html");
     }
 });
