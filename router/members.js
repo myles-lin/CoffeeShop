@@ -3,7 +3,6 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const connectDB = require("../utils/db");
 const memberModel = require("../models/memberModel");
-// const db = connectDB();
 
 router.get("/", async (req, res) => {
     console.log(req.session);
@@ -17,8 +16,22 @@ router.get("/", async (req, res) => {
         console.log(userInfo.password);
         console.log(userInfo.nickname);
 
-        res.render("member.html");
+        res.render("member", { userInfo : userInfo });
     }
+});
+
+router.put("/:account", async (req, res) => {
+    console.log("put");
+    const db = connectDB();
+    const result = await memberModel.updateOne({account: req.params.account}, {$set: req.body});
+    res.send(result);
+});
+
+router.patch("/:id", async (req, res) => {
+    console.log("patch");
+    const db = connectDB();
+    const result = await memberModel.updateOne({_id: req.params.id}, {$set: req.body});
+    res.send(result);
 });
 
 router.get("/signout", (req, res) => {

@@ -64,7 +64,7 @@ router.post("/", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
     const db = connectDB();
-    const result = await productModel.deleteOne({_id : req.body.id});
+    const result = await productModel.deleteOne({_id : req.params.id});
     console.log(result);
     res.json(result);
 });
