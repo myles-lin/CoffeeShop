@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Coffee</title>
     <link rel="stylesheet" href="../css/style.css" type="text/css">
-    <link rel="stylesheet" href="../css/style_old.css" type="text/css">
+    <!-- <link rel="stylesheet" href="../css/style_old.css" type="text/css"> -->
 </head>
 <body>
     <header>
@@ -58,9 +58,7 @@
 
             <div class="row flex-2">
                 <div class="form-login">
-                    <h2>會員系統首頁</h2>
-                    <h2>歡迎光臨我們的網站</h2>
-                    <h1>Member Login</h1>
+                    <h1 style="text-align: center;">Member Login</h1>
                     <form action="/login" method="POST">
                         <div class="form-group">
                             <label for="username">Username</label>
@@ -70,9 +68,11 @@
                             <label for="password">Password</label>
                             <input type="password" id="password" name="password" required>
                         </div>
+                        <div style="text-align: center;">
                         <button type="submit">Login</button>
+                        </div>
                         <div style="text-align: right; margin-top: 20px">
-                            <a href="./register.html">Signup new accout</a>
+                            <a href="/register">Signup new accout</a>
                         </div>
                         <div class="error-message"></div>
                     </form>

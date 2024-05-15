@@ -7,7 +7,7 @@ const memberModel = require("../models/memberModel");
 router.get("/", async (req, res) => {
     console.log(req.session);
     if (!req.session.userInfo || req.session.userInfo.isLogined !== true) {
-        res.send("Get Out!!!");
+        res.redirect("/error?msg=Not logged in yet.");
     } else {
         const db = connectDB();
         const userInfo = await memberModel.findOne({ account : req.session.userInfo.name });

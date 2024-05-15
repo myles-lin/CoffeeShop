@@ -84,6 +84,7 @@
             <div class="row flex-2">
                 <table>
                     <tr>
+                        <th>No.</th>
                         <th>Name</th>
                         <th>Category</th>
                         <th>RoastLevel</th>
@@ -95,12 +96,13 @@
                     </tr>
                     <% products.forEach(function(product, index) { %>
                     <tr>
+                        <td><%= index+1 %></td>
                         <td><%= product.name %></td>
                         <td><%= product.category %></td>
                         <td><%= product.roastLevel %></td>
                         <td><%= product.region %></td>
-                        <td><%= product.quantity %></td>
-                        <td><%= product.price %></td>
+                        <td style="text-align: right;"><%= product.quantity %></td>
+                        <td style="text-align: right;"><%= product.price %></td>
                         <td><%= product.content %></td>
                         <td>
                             <input type="hidden" id="product_id_<%= index %>" name="id" value="<%= product._id %>">
