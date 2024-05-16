@@ -9,12 +9,12 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script>
         $(function(){
-            <% products.forEach(function(product, index) { %>
+            <% cart.forEach(function(item, index) { %>
             $("#btn_<%= index %>").click(() => {
                 if(confirm('Are you sure you want to delete this?')){
                 const id = $("#product_id_<%= index %>").val();
                 $.ajax({
-                    url  : "/products/" + id,
+                    url  : "/shoppingCart/" + id,
                     type : "DELETE",
                     data : {id: id},
                     dataType: "json"
@@ -34,21 +34,20 @@
 <body>
     <header>
         <h1 style="position: absolute;left: 120px;top: 0;line-height: 80px;">扣咖啡</h1>
-
         <nav>
             <ul>
                 <li>
                     <a href="/adminAuth">MANAGE</a>
                     <ul>
-                        <li><a href="/products/add">Add Products</a></li>
-                        <li><a href="/products" >Manage Products</a></li>
+                        <li><a href="/products/f/add">Add Products</a></li>
+                        <li><a href="/products">Manage Products</a></li>
                         <li><a href="#">Orders</a></li>
                         <li><a href="#">Reviews</a></li>
                     </ul>
                 </li>
                 <li><a href="/">Home</a></li>
                 <li><a href="/members">MEMBER</a></li>
-                <li><a href="#">CART</a></li>
+                <li><a href="/shoppingCart">CART</a></li>
                 <li><a href="/login">SIGNIN</a></li>
                 <li><a href="/members/signout">SIGNOUT</a></li>
              </ul>
@@ -60,13 +59,13 @@
         <div class="d-flex outer">
             <div class="row">
                 <div id="category-menu">
-                    <p class="gnav__link">CATEGORY</p>
+                    <p class="gnav__link"><h3>CATEGORY</h3></p>
                         <div class="category-list"> 
                             <ul>
                                 <li> <a href="">Roast Level</a>
-                                    <ul><li><a href="">Light roast</a> </li>  
-                                        <li> <a href="">Medium roast</a> </li>  
-                                        <li> <a href="">Dark roast</a> </li>  </ul>  </li>  
+                                    <ul><li><form action="/products/f/search" method="GET"> <input type="hidden" name="roastLevel" value="light roast"/> <input type="submit" value="Light roast"> </form></li>  
+                                        <li><form action="/products/f/search" method="GET"> <input type="hidden" name="roastLevel" value="medium roast"/> <input type="submit" value="Medium roast"> </form></li>  
+                                        <li><form action="/products/f/search" method="GET"> <input type="hidden" name="roastLevel" value="dark roast"/> <input type="submit" value="Dark roast"></form>  </li>  </ul>  </li>  
                                 <li> <a href="">Region</a>  
                                     <ul><li> <a href="">Asia / Oceania</a> </li>  
                                         <li> <a href="">Latin America</a> </li>  
@@ -83,43 +82,41 @@
             <div class="row flex-2">
                 <table>
                     <tr>
-                        <th>No.</th>
-                        <th>Name</th>
-                        <th>Category</th>
-                        <th>RoastLevel</th>
-                        <th>Region</th>
+                        <th>Product Name</th>
                         <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Content</th>
-                        <th>Delete</th>
+                        <th>Unit Price</th>
+                        <th>Total Price</th>
+                        <th>Remove</th>
                     </tr>
-                    <% products.forEach(function(product, index) { %>
+                    <% if (cart.length > 0) {
+                        let total = 0;
+                        cart.forEach(function(item, index) { %>
                     <tr>
-                        <td><%= index+1 %></td>
-                        <td><%= product.name %></td>
-                        <td><%= product.category %></td>
-                        <td><%= product.roastLevel %></td>
-                        <td><%= product.region %></td>
-                        <td style="text-align: right;"><%= product.quantity %></td>
-                        <td style="text-align: right;"><%= product.price %></td>
-                        <td><%= product.content %></td>
-                        <td>
-                            <input type="hidden" id="product_id_<%= index %>" name="id" value="<%= product._id %>">
-                            <button class="btn_remove" id="btn_<%= index %>" type="button">
-                            <span>Delete</span>
-                            </button>
-                            </form>
-                        </td>
+                        <td><%= item.product_name %></td>
+                        <td align="right"><%= item.product_quantity %></td>
+                        <td align="right"><%= item.product_price %></td>
+                        <td align="right"><%= parseFloat(item.product_quantity) * parseFloat(item.product_price) %></td>
+                        <input type="hidden" id="product_id_<%= index %>" name="id" value="<%= item.product_id %>">
+                        <td><button type="button" class="btn_remove" id="btn_<%= index %>">Remove</button></td>
                     </tr>
-                    <% }); %>
+                    <% 
+                        total += parseFloat(item.product_quantity) * parseFloat(item.product_price);
+                        })
+                    %>
+                    <tr>
+                        <td colspan="3" aling="right"><b>Total</b></td>
+                        <td align="right"><%= total %></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <%} else { %>
+                    <tr>
+                        <td colspan="5">No Item Found in Cart</td>
+                    </tr>
+                    <% } %>
                 </table>
-                <!-- <ul>
-                    <% products.forEach(function(product, index) { %>
-                        <li>
-                            index: <%= index+1 %> name: <%= product.name %> category: <%= product.category %>
-                        </li>
-                    <% }); %>
-                    </ul> -->
+                <div>
+                <a href="/shoppingCart/checkInventory">Order this cart</a>
+                </div>
             </div>
         </div>
         </div>
@@ -130,4 +127,4 @@
 </footer>
 
 </body>
-</html>
+</html> 

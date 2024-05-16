@@ -71,9 +71,9 @@ header nav ul li ul li a:hover {
 }
 /* header 選單設定 end */
 
-h2 {
+h3 {
     text-align: center;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 
 .container {
@@ -97,6 +97,19 @@ h2 {
     margin: 3px;
     color: #333;
     display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row_non-displayflex {
+    margin-top: 100px;
+    height: 100%;
+    width: 100%;
+    background-color: #d3d7d8;
+    flex: 1;
+    margin: 3px;
+    color: #333;
+    /* display: flex; */
     justify-content: center;
     align-items: center;
 }
@@ -162,6 +175,18 @@ button {
     margin: 10px;
     padding: 10px;
     background-color: #007bff;
+    color: #fff;
+    font-size: 14px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.btn_remove {
+    width: 80px;
+    margin: 1px;
+    padding: 8px;
+    background-color: #dd613b;
     color: #fff;
     font-size: 14px;
     border: none;

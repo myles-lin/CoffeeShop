@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Coffee</title>
-    <link rel="stylesheet" href="../css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 <body>
@@ -16,7 +16,7 @@
                 <li>
                     <a href="/adminAuth">MANAGE</a>
                     <ul>
-                        <li><a href="/products/add">Add Products</a></li>
+                        <li><a href="/products/f/add">Add Products</a></li>
                         <li><a href="/products">Manage Products</a></li>
                         <li><a href="#">Orders</a></li>
                         <li><a href="#">Reviews</a></li>
@@ -24,7 +24,7 @@
                 </li>
                 <li><a href="/">Home</a></li>
                 <li><a href="/members">MEMBER</a></li>
-                <li><a href="#">CART</a></li>
+                <li><a href="/shoppingCart">CART</a></li>
                 <li><a href="/login">SIGNIN</a></li>
                 <li><a href="/members/signout">SIGNOUT</a></li>
              </ul>
@@ -36,13 +36,13 @@
         <div class="d-flex outer">
             <div class="row">
                 <div id="category-menu">
-                    <p class="gnav__link">CATEGORY</p>
+                    <p class="gnav__link"><h3>CATEGORY</h3></p>
                         <div class="category-list"> 
                             <ul>
                                 <li> <a href="">Roast Level</a>
-                                    <ul><li><form action="/products/search" method="GET"> <input type="hidden" name="roastLevel" value="light roast"/> <input type="submit" value="Light roast"> </form></li>  
-                                        <li><form action="/products/search" method="GET"> <input type="hidden" name="roastLevel" value="medium roast"/> <input type="submit" value="Medium roast"> </form></li>  
-                                        <li><form action="/products/search" method="GET"> <input type="hidden" name="roastLevel" value="dark roast"/> <input type="submit" value="Dark roast"></form>  </li>  </ul>  </li>  
+                                    <ul><li><form action="/products/f/search" method="GET"> <input type="hidden" name="roastLevel" value="light roast"/> <input type="submit" value="Light roast"> </form></li>  
+                                        <li><form action="/products/f/search" method="GET"> <input type="hidden" name="roastLevel" value="medium roast"/> <input type="submit" value="Medium roast"> </form></li>  
+                                        <li><form action="/products/f/search" method="GET"> <input type="hidden" name="roastLevel" value="dark roast"/> <input type="submit" value="Dark roast"></form>  </li>  </ul>  </li>  
                                 <li> <a href="">Region</a>  
                                     <ul><li> <a href="">Asia / Oceania</a> </li>  
                                         <li> <a href="">Latin America</a> </li>  

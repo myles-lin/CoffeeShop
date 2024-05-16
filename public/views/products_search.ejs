@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Coffee</title>
-    <link rel="stylesheet" href="../css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 <body>
@@ -85,9 +85,9 @@
                     <% products.forEach(function(product, index) { %>
                     <div class="p-item__listitem">
                         <div class="p-item__img">
-                            <figure class="img__wrap"><a href=""><img loading="lazy" src="https://baseec-img-mng.akamaized.net/images/item/origin/a6b6da597195093f45a750a648d42dbf.png?imformat=generic&amp;q=90&amp;im=Resize,width=640,type=normal" alt="Indonesia-Hans/Sukasari - West Java/Typica/Anaerobic Natural/Light" title="Indonesia-Hans/Sukasari - West Java/Typica/Anaerobic Natural/Light" class="image-resize"></a></figure>
+                            <figure class="img__wrap"><a href="/products/<%= product._id %>"><img loading="lazy" src="https://baseec-img-mng.akamaized.net/images/item/origin/a6b6da597195093f45a750a648d42dbf.png?imformat=generic&amp;q=90&amp;im=Resize,width=640,type=normal" alt="Indonesia-Hans/Sukasari - West Java/Typica/Anaerobic Natural/Light" title="Indonesia-Hans/Sukasari - West Java/Typica/Anaerobic Natural/Light" class="image-resize"></a></figure>
                         </div>
-                    <a class="p-item__contents" href="https://lonich.official.ec/items/85909522">
+                    <a class="p-item__contents" href="/products/<%= product._id %>">
                         <h2 class="p-item__title"><%= product.name %></h2>
                         <ul class="p-item__detail">
                         <li class="p-item__price">＄<%= product.price %></li>

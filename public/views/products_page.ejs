@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Coffee</title>
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+<body>
+    <header>
+        <h1 style="position: absolute;left: 120px;top: 0;line-height: 80px;">扣咖啡</h1>
+        <nav>
+            <ul>
+                <li>
+                    <a href="/adminAuth">MANAGE</a>
+                    <ul>
+                        <li><a href="/products/f/add">Add Products</a></li>
+                        <li><a href="/products">Manage Products</a></li>
+                        <li><a href="#">Orders</a></li>
+                        <li><a href="#">Reviews</a></li>
+                    </ul>
+                </li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/members">MEMBER</a></li>
+                <li><a href="#">CART</a></li>
+                <li><a href="/login">SIGNIN</a></li>
+                <li><a href="/members/signout">SIGNOUT</a></li>
+             </ul>
+       </nav>
+    </header>
+    <main>
+    <nav>
+    <div class="container">
+        <div class="d-flex outer">
+            <div class="row">
+                <div id="category-menu">
+                    <p class="gnav__link">CATEGORY</p>
+                        <div class="category-list"> 
+                            <ul>
+                                <li> <a href="">Roast Level</a>
+                                    <ul><li><form action="/products/f/search" method="GET"> <input type="hidden" name="roastLevel" value="light roast"/> <input type="submit" value="Light roast"> </form></li>  
+                                        <li><form action="/products/f/search" method="GET"> <input type="hidden" name="roastLevel" value="medium roast"/> <input type="submit" value="Medium roast"> </form></li>  
+                                        <li><form action="/products/f/search" method="GET"> <input type="hidden" name="roastLevel" value="dark roast"/> <input type="submit" value="Dark roast"></form>  </li>  </ul>  </li>  
+                                <li> <a href="">Region</a>  
+                                    <ul><li> <a href="">Asia / Oceania</a> </li>  
+                                        <li> <a href="">Latin America</a> </li>  
+                                        <li> <a href="">Africa</a> </li>  </ul>  </li>  
+                                <li> <a href="">Brewing Equipment</a>  
+                                    <ul><li> <a href="">LILI</a> </li>  
+                                        <li> <a href="">MHW-3BOMBER</a> </li>  
+                                        <li> <a href="">NANA COFFEE ROASTERS</a> </li>  </ul>  </li>    
+                            </ul>
+                        </div>        
+                </div>
+            </div>
+
+            <div class="row flex-2">
+                <div class="container">
+                    <div class="d-flex outer">
+                        <div class="row">
+                            <div class="swiper-slide p-itemimg__listitem img__wrap swiper-slide-visible swiper-slide-active" role="group" aria-label="1 / 4" style="width: 420px; opacity: 1; transform: translate3d(0px, 0px, 0px);">
+                                <img src="https://baseec-img-mng.akamaized.net/images/item/origin/eb3c4487d9030318ffa888e48b26a4c5.jpg?imformat=generic&amp;q=90&amp;im=Resize,width=1280,type=normal" alt="Competition Wave Filters (50 pcs per box)"></div>
+                        </div>
+                        <div class="row_non-displayflex flex-2">
+                            <h1 class="p-item__title"><%= products.name %></h1>
+                            <div class="p-item__price">$<%= products.price %></div>
+                            <br>
+                            <br>
+                            <div class="p-item__description">
+                                <p>2024年にシカゴで開催されるWorld Brewers Championshipに向け、Thailand National Brewers ChampionやWorld Siphonist Championを擁するタイのNANA COFFEE Roastersが開発した新しいWave Filterを日本でいち早く販売します。<br>
+                            <br>
+                            近年スペシャルティコーヒーの盛り上がりが著しく、良いコーヒーを求める消費者が増えると共に、ローカルロースターのレベルも上がってきているタイ・バンコク。NANA COFFEE Roastersはそんなバンコクのコーヒーシーンの最先端を走る、現地で最も人気のあるロースターのひとつです。サイフォンやブリューワーズの大会で輝かしい結果を残し続けている彼らが開発した、カリタ155サイズのこのコンペティション向けWaveフィルターは、コーヒーの持つフレーバーをより鮮明に表現できます。また、カリタウェーブほどペーパーの匂いが気にならず、目詰まりが少ないのも特長です。<br>
+                            <br>
+                            【2023年Thailand Brewer Champion のKusakabe Wasin氏からのコメント】<br>
+                            “World Brewers Cupに向け、甘くてバランスのとれた1杯を追求する中で、私は世界中のペーパーを試しました。その中でもこのコンペティションウェーブフィルターは 100% のプレミアパルプから作られておりペーパーリンスをする必要はありません。他にはない甘みと透明感のあるコーヒーの抽出が可能です。”<br>
+                            <br>
+
+                            </div>
+                            <br>
+                            <form id="purchase_form" name="menu" action="/shoppingCart" method="POST" data-purchase-form="" data-disabled="false">
+                                <div id="itemSelect">
+                                    <div id="amountSelectWrap" class="purchaseElement">
+                                        <label for="amountSelect">Quantity</label>
+                                        <select id="product_quantity" name="product_quantity" class="amountSelect" style="">
+                                            <% for(let i=1 ; i <= products.quantity ; i++){ %>
+                                            <option value="<%= i %>"><%= i %></option>
+                                            <% if(i===99) break; %>
+                                            <% } %>
+                                        </select>
+                                    </div>    
+                                </div>
+                            <div class="purchaseButton">
+                                <input type="hidden" id="producd_id" name="product_id" value="<%= products._id %>">
+                                <input type="hidden" id="producd_name" name="product_name" value="<%= products.name %>">
+                                <input type="hidden" id="producd_price" name="product_price" value="<%= products.price %>">
+                                <button type="submit" class="purchaseButton__btn purchaseButton__btn--addToCart" style="display: block;">  Add to cart  </button>
+                            </form>
+            
+                        </div>
+            
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </nav>
+    </main>
+<footer>
+    <p>ddd</p>
+</footer>
+
+</body>
+</html> 
+
+
+
+
+    
+
+    <!-- <div class="container">
+    <div class="c-col__main .d-flex">
+        <div class="swiper-slide p-itemimg__listitem img__wrap swiper-slide-visible swiper-slide-active" role="group" aria-label="1 / 4" style="width: 420px; opacity: 1; transform: translate3d(0px, 0px, 0px);">
+        <img src="https://baseec-img-mng.akamaized.net/images/item/origin/eb3c4487d9030318ffa888e48b26a4c5.jpg?imformat=generic&amp;q=90&amp;im=Resize,width=1280,type=normal" alt="Competition Wave Filters (50 pcs per box)"></div>
+
+
+<div class="flex-2">
+<h1 class="p-item__title">Competition Wave Filters (50 pcs per box)</h1>
+<div class="p-item__price  ">
+    <h2>¥1,550 (€9,30)</h2>
+    </div>
+</div> 
+                            <div class="p-item__description">
+    <p>2024年にシカゴで開催されるWorld Brewers Championshipに向け、Thailand National Brewers ChampionやWorld Siphonist Championを擁するタイのNANA COFFEE Roastersが開発した新しいWave Filterを日本でいち早く販売します。<br>
+<br>
+近年スペシャルティコーヒーの盛り上がりが著しく、良いコーヒーを求める消費者が増えると共に、ローカルロースターのレベルも上がってきているタイ・バンコク。NANA COFFEE Roastersはそんなバンコクのコーヒーシーンの最先端を走る、現地で最も人気のあるロースターのひとつです。サイフォンやブリューワーズの大会で輝かしい結果を残し続けている彼らが開発した、カリタ155サイズのこのコンペティション向けWaveフィルターは、コーヒーの持つフレーバーをより鮮明に表現できます。また、カリタウェーブほどペーパーの匂いが気にならず、目詰まりが少ないのも特長です。<br>
+<br>
+【2023年Thailand Brewer Champion のKusakabe Wasin氏からのコメント】<br>
+“World Brewers Cupに向け、甘くてバランスのとれた1杯を追求する中で、私は世界中のペーパーを試しました。その中でもこのコンペティションウェーブフィルターは 100% のプレミアパルプから作られておりペーパーリンスをする必要はありません。他にはない甘みと透明感のあるコーヒーの抽出が可能です。”<br>
+<br>
+【おすすめ抽出レシピ】<br>
+豆15g　/ 注湯量220ml<br>
+抽出合計時間 2分10秒<br>
+0:00 - 0:40 93℃のお湯50mlを全体に回すように注ぐ<br>
+0:40 - 1:10 70℃のお湯を50mlを中心に向かって注ぐ<br>
+1:10 - 1:40 70℃の60mlを全体に回すように注ぐ<br>
+1:40 - 2:10 70℃の60mlを中心に向かって注ぐ<br>
+<br>
+【Infomation】<br>
+ブランド：NANA COFFEE roasters<br>
+材質：Premium paper pulp<br>
+容量：1箱50枚入り<br>
+使用可能なドリッパー<br>
+Lili Dripper Mini / Kalita Wave Dripper 155 / Origami Dripper / Orea Brewer V3 Small / April Dripper　等<br>
+送料：680円</p>
+</div>
+
+
+<form id="purchase_form" class="x_purchaseForm" name="menu" action="https://lonich.official.ec/cart/add/lonich-official-ec" method="post" data-purchase-form="" data-disabled="false">
+    <div id="itemSelect">
+        <div id="amountSelectWrap" class="purchaseElement" data-target-version="v2">
+            <label for="amountSelect">Quantity</label>
+            <select name="amount" id="amountSelect" class="amountSelect" style="">   <option value="1">1</option>    <option value="2">2</option>    <option value="3">3</option>    <option value="4">4</option>    <option value="5">5</option></select> </div>    
+    </div> <style> body form[id] #variationSelectWrap,body form[id] .itemOptionElement{max-width:100%}body #purchase_form #itemSelect #valiationSelect,body #purchase_form #itemSelect select.itemOption__select,body form[id] #itemSelect #amountSelect,body form[id] #itemSelect #valiationSelect,body form[id] #itemSelect select.itemOption__select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cdefs%3E%3Cfilter id='a' width='10' height='6' x='0' y='0' filterUnits='userSpaceOnUse'%3E%3CfeFlood flood-color='%23333' flood-opacity='.5' result='flood'/%3E%3CfeComposite in2='SourceGraphic' operator='in' result='composite'/%3E%3CfeBlend in2='SourceGraphic' mode='multiply' result='blend'/%3E%3C/filter%3E%3C/defs%3E%3Cpath d='m5 6 5-6H0Z' style='fill:%23fafafa;fill-rule:evenodd;filter:url(%23a)'/%3E%3C/svg%3E");background-position:right .35em center;background-repeat:no-repeat;background-size:auto;height:auto;line-height:normal;max-width:100%;min-height:2.1em;padding-right:1em;white-space:normal;word-break:normal} </style>  <input type="hidden" name="shopID" value="lonich-official-ec"> <input type="hidden" name="id" value="84373172"> 
+<div class="purchaseButton">
+    <button type="submit" class="purchaseButton__btn purchaseButton__btn--addToCart" style="display: block;">  Add to cart  </button>
+    <input type="hidden" class="x_ageVerificationGenre" value="">
+    <input type="hidden" class="x_ageVerificationAge" value=""> 
+</form>
+
+</div> -->

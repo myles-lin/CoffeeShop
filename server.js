@@ -32,6 +32,7 @@ const registerRouter = require("./router/register");
 const adminRouter = require("./router/adminAuth");
 const membersRouter = require("./router/members");
 const productsRouter = require("./router/products");
+const shoppingCartRouter = require("./router/shoppingCart");
 const booksRouter = require("./router/books");
 
 app.get("/", (req, res) => {
@@ -53,7 +54,7 @@ app.post("/login", async (req, res, next) => {
             { password : password}
         ]
     });
-    console.log(result);
+    // console.log(result);
     if (result !== null) {
         next();
     } else {
@@ -77,6 +78,7 @@ app.use("/register", registerRouter);
 app.use("/adminAuth", adminRouter);
 app.use("/members", membersRouter);
 app.use("/products", productsRouter);
+app.use("/shoppingCart", shoppingCartRouter);
 app.use("/books", booksRouter);
 
 app.listen(portNum, ()=>{

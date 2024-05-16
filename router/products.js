@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); /* 似乎在這頁面沒用到 */
 const connectDB = require("../utils/db");
 const productModel = require("../models/productModel");
 const fs = require("fs");
@@ -11,32 +11,14 @@ router.get("/", async (req, res) => {
     // };
     const db = connectDB();
     let product = await productModel.find();
-
-    // let path = "../views/products_search.ejs";
     res.render("products_manage", { products : product });
-    
-    // console.log(result);
-    // let product = res.json(result);
-    
-    // console.log(req.session);
-    // if (!req.session.userInfo ||req.session.userInfo.name !== "admin" || req.session.userInfo.isLogined !== true) {
-    //     res.send("Get Out!!!");
-    // } else {
-    //     let path = "../views/products_add.html";
-    //     res.render("index", { path : path });
-    // }
 });
 
-router.get("/search", async (req, res) => {
+router.get("/:id", async (req, res) => {
     const db = connectDB();
-    console.log(req.query);
-    const data = req.query;
-    let result = await productModel.find(data);
-    if (result.length === 0) {
-        res.send("There's no items for sale.");
-    } else {
-        res.render("products_search",{ products : result });
-    }
+    let result = await productModel.findOne({_id: req.params.id});
+    // res.send(result);
+    res.render("products_page", { products : result});
 });
 
 router.post("/", async (req, res) => {
@@ -62,17 +44,28 @@ router.post("/", async (req, res) => {
     };
 });
 
+router.get("/f/search", async (req, res) => {
+    const db = connectDB();
+    // console.log(req.query);
+    const data = req.query;
+    let result = await productModel.find(data);
+    if (result.length === 0) {
+        res.send("There's no items for sale.");
+    } else {
+        res.render("products_search",{ products : result });
+    }
+});
+
+router.get("/f/add", (req, res) => {
+    res.render("products_add.html");
+});
+
 router.delete("/:id", async (req, res) => {
     const db = connectDB();
     const result = await productModel.deleteOne({_id : req.params.id});
     console.log(result);
-    res.json(result);
+    res.status(200).send({ success: true, result });
 });
-
-router.get("/add", (req, res) => {
-    res.render("products_add.html");
-});
-
 
 router.get("/testajax", (req, res)=>{
     res.send("OKKKKK!");
