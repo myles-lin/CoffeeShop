@@ -8,7 +8,6 @@ router.get("/", (req, res) => {
     if (!req.session.cart) {
         req.session.cart = [];
     };
-    console.log(req.session.cart);
     res.render("shoppingCart", { cart : req.session.cart, error : [] });
 });
 

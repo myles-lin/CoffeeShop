@@ -4,7 +4,7 @@ const connectDB = require("../utils/db");
 const productModel = require("../models/productModel");
 const orderModel = require("../models/orderModel");
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
     console.log("orders get router");
 });
 
@@ -30,22 +30,33 @@ router.post("/", async (req, res, next) => {
     if (checkSuccess === false) {
         res.render("shoppingCart", { cart : req.session.cart, error : errorList});
     } else {
-        // 訂單全部商品數量正確, 更新product table數量, 開始下訂單
+
         try {
-        const order = new orderModel({ 
-            account : req.session.userInfo.name,
-            purchase : req.session.cart,
-            totalAmount: totalAmount,
-            status : "opne",
-            message : []
-        })
-        const orderPost = await order.save();
-        res.redirect("/orders");
+            // 訂單全部商品數量正確, 更新product table數量, 開始下訂單
+
+            // AUTO INCREMENT orderID (+1)
+            const getLastItem = await orderModel.find().sort({orderId: -1}).limit(1);
+            if (getLastItem.length === 0) {
+                var seqId = 1;
+            } else {
+                var seqId = getLastItem[0].orderId + 1;
+            };
+
+            const order = new orderModel({
+                orderId : seqId,
+                account : req.session.userInfo.name,
+                purchase : req.session.cart,
+                totalAmount: totalAmount,
+                status : "open",
+                message : []
+            });
+            const orderPost = await order.save();
+            res.redirect("/orders");
 
         } catch (error) {
             console.log("Order POST error:", error);
             res.status(500).json({error});
-        }
+        };
     };
 });
 

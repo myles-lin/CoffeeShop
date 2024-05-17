@@ -1,14 +1,9 @@
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
-    account : {
-        type : String,
-        required : true,
-    },
-    purchase : {
-        type : Array,
-        required : true
-    },
+    orderId : { type : Number, required : true, unique : true },
+    account : { type : String, required : true },
+    purchase : { type : Array, required : true },
     totalAmount : Number,
     status : String,
     message : Array
