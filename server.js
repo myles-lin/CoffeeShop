@@ -33,6 +33,7 @@ const adminRouter = require("./router/adminAuth");
 const membersRouter = require("./router/members");
 const productsRouter = require("./router/products");
 const shoppingCartRouter = require("./router/shoppingCart");
+const ordersRouter = require("./router/orders");
 const booksRouter = require("./router/books");
 
 app.get("/", (req, res) => {
@@ -79,6 +80,7 @@ app.use("/adminAuth", adminRouter);
 app.use("/members", membersRouter);
 app.use("/products", productsRouter);
 app.use("/shoppingCart", shoppingCartRouter);
+app.use("/orders", ordersRouter);
 app.use("/books", booksRouter);
 
 app.listen(portNum, ()=>{

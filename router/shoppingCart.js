@@ -41,7 +41,7 @@ router.post("/", (req, res) => {
     res.redirect("/");
 });
 
-router.get("/checkInventory", async (req, res) => {
+router.post("/checkInventory", async (req, res) => {
     const cart = req.session.cart;
     const db = connectDB();
     let errorList = [];
@@ -59,6 +59,7 @@ router.get("/checkInventory", async (req, res) => {
         res.render("shoppingCart", { cart : req.session.cart, error : errorList});
     } else {
         console.log("All PASS !!!");
+        res.redirect(307, "/orders");
     };
 });
 

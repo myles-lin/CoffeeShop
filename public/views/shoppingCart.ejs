@@ -118,7 +118,10 @@
                 <div class="error-message" style="margin: 5px"><%= err %></div>
                 <% }); %>
                 <% if (cart.length > 0) { %>
-                <a href="/shoppingCart/checkInventory"><button type="button" style="width: auto;">Order this cart</button></a>
+                <!-- <a href="/shoppingCart/checkInventory"><button type="button" style="width: auto;">Order this cart</button></a> -->
+                <form action="/orders" method="POST">
+                    <button type="submit" style="width: auto;">Order this cart</button>
+                </form>
                 <% } %>
             </div>
         </div>

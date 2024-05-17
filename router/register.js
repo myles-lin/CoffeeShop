@@ -21,7 +21,7 @@ router.post("/", async (req, res) => {
             account : account,
             password : password
         });
-        member.save();
+        await member.save();
         res.redirect("/");
     };
 });
