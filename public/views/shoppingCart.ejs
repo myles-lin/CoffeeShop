@@ -79,7 +79,7 @@
                 </div>
             </div>
 
-            <div class="row flex-2">
+            <div class="row_d-flex-col flex-2" style="align-items: center;">
                 <table>
                     <tr>
                         <th>Product Name</th>
@@ -110,13 +110,16 @@
                     </tr>
                     <%} else { %>
                     <tr>
-                        <td colspan="5">No Item Found in Cart</td>
+                        <td colspan="5" align="center">No Item Found in Cart</td>
                     </tr>
                     <% } %>
                 </table>
-                <div>
-                <a href="/shoppingCart/checkInventory">Order this cart</a>
-                </div>
+                <% error.forEach(function(err) { %>
+                <div class="error-message" style="margin: 5px"><%= err %></div>
+                <% }); %>
+                <% if (cart.length > 0) { %>
+                <a href="/shoppingCart/checkInventory"><button type="button" style="width: auto;">Order this cart</button></a>
+                <% } %>
             </div>
         </div>
         </div>

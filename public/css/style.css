@@ -101,7 +101,7 @@ h3 {
     align-items: center;
 }
 
-.row_non-displayflex {
+.row_d-flex-col {
     margin-top: 100px;
     height: 100%;
     width: 100%;
@@ -109,9 +109,10 @@ h3 {
     flex: 1;
     margin: 3px;
     color: #333;
-    /* display: flex; */
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
 }
 
 .category-list {
@@ -170,6 +171,13 @@ a {
     font-size: 16px;
 }
 
+.text_link {
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 10px;
+}
+
 button {
     width: 100px;
     margin: 10px;
@@ -193,6 +201,7 @@ button {
     border-radius: 3px;
     cursor: pointer;
 }
+
 
 button:hover {
     background-color: #c2ab9f;
