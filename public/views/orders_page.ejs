@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Coffee</title>
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script>
+        $(function){
+            <%let cnt_head = orders.message.length;%>
+            <%let index_head = 0;%>
+            <%for (let i = 0 ; i < cnt_head ; i++) { index_head += 1; %>
+                 
+                $("btn_<%= index_head %>").click(() => {
+                    alert("dd");
+                
+                });
+            <% }; %>
+        };
+    </script>
+</head>
+<body>
+    <header>
+        <h1 style="position: absolute;left: 120px;top: 0;line-height: 80px;">扣咖啡</h1>
+        <nav>
+            <ul>
+                <li>
+                    <a href="/adminAuth">MANAGE</a>
+                    <ul>
+                        <li><a href="/products/f/add">Add Products</a></li>
+                        <li><a href="/products">Manage Products</a></li>
+                        <li><a href="#">Orders</a></li>
+                        <li><a href="#">Reviews</a></li>
+                    </ul>
+                </li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/members">MEMBER</a></li>
+                <li><a href="#">CART</a></li>
+                <li><a href="/login">SIGNIN</a></li>
+                <li><a href="/members/signout">SIGNOUT</a></li>
+             </ul>
+       </nav>
+    </header>
+    <main>
+    <nav>
+    <div class="container">
+        <div class="d-flex outer">
+            <div class="row">
+                <div id="category-menu">
+                    <p class="gnav__link"><h3>CATEGORY</h3></p>
+                        <div class="category-list"> 
+                            <ul>
+                                <li> <a href="">Roast Level</a>
+                                    <ul><li><form action="/products/f/search" method="GET"> <input type="hidden" name="roastLevel" value="light roast"/> <input type="submit" value="Light roast"> </form></li>  
+                                        <li><form action="/products/f/search" method="GET"> <input type="hidden" name="roastLevel" value="medium roast"/> <input type="submit" value="Medium roast"> </form></li>  
+                                        <li><form action="/products/f/search" method="GET"> <input type="hidden" name="roastLevel" value="dark roast"/> <input type="submit" value="Dark roast"></form>  </li>  </ul>  </li>  
+                                <li> <a href="">Region</a>  
+                                    <ul><li> <a href="">Asia / Oceania</a> </li>  
+                                        <li> <a href="">Latin America</a> </li>  
+                                        <li> <a href="">Africa</a> </li>  </ul>  </li>  
+                                <li> <a href="">Brewing Equipment</a>  
+                                    <ul><li> <a href="">LILI</a> </li>  
+                                        <li> <a href="">MHW-3BOMBER</a> </li>  
+                                        <li> <a href="">NANA COFFEE ROASTERS</a> </li>  </ul>  </li>    
+                            </ul>
+                        </div>        
+                </div>
+            </div>
+
+            <div class="row_d-flex-col flex-2" style="align-items: center;">
+                <table>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Purchaser</th>
+                        <th>Payment</th>
+                        <th>Status</th>
+                        <th>ordered on</th>
+                        <th>updated on</th>
+                    </tr>
+                    <tr style="text-align: center;">
+                        <td><%= orders.orderId %></td>
+                        <td><%= orders.account %></td>
+                        <td>$ <%= orders.totalAmount %></td>
+                        <td><%= orders.status %></td>
+                        <td><%= orders.createdAt.toLocaleString('zh-TW') %></td>
+                        <td><%= orders.updatedAt.toLocaleString('zh-TW') %></td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td colspan="5" aling="right"><b>Purchase List</b></td>
+                    </tr>
+                    <tr>
+                        <th>No.</th>
+                        <th>Product</th>
+                        <th>Unit Price</th>
+                        <th>Quantity</th>
+                    </tr>
+                    <% orders.purchase.forEach((product, index) => { %>
+                    <tr>
+                        <td style="text-align: center;"><%= index + 1 %></td>
+                        <td><%= product.product_name %></td>
+                        <td style="text-align: right;">$ <%= product.product_price %></td>
+                        <td style="text-align: center;"><%= product.product_quantity %></td>
+                    </tr>
+                    <% }); %>
+                </table>
+                <div>Seller and customer order communication</div>
+                <table style="width: 95%;">
+                    <% let cnt = orders.message.length;
+                        let index = 0;
+                    for (let i = cnt - 1 ; i >= 0 ; i--) { index += 1; %>
+                    <tr>
+                        <td>
+                            <input type="hidden" id="msg_id_<%= index %>" value="<%= orders.message[i][0] %>">
+                            <div>user : <%= orders.message[i][1] %></div>
+                            <div><%= orders.message[i][2] %></div>
+                            <div style="text-align: right;"><%= orders.message[i][3].toLocaleString('zh-TW') %></div>
+                        </td>
+                        <td style="width: 20px;"><button class="btn_remove" type="button" id="btn_<%= index %>">Delete</button></td>
+                    </tr>
+                    <% } %>
+                </table>
+                <form action="/orders/message" method="POST">
+                    <div>
+                    <input type="hidden" name="orderId" value="<%= orders.orderId %>">
+                    </div>
+                    <div>
+                    <textarea class="content-box" name="message" style="width: 95%;" rows="4" cols="100" placeholder="Message to seller."></textarea>
+                    </div>
+                    <br>
+                    <button class="btn" type="submit">Send</button>
+                </form>
+            </div>
+        </div>
+        </div>
+    </nav>
+    </main>
+<footer>
+    <p>ddd</p>
+</footer>
+
+</body>
+</html>

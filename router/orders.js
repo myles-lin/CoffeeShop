@@ -6,6 +6,26 @@ const orderModel = require("../models/orderModel");
 
 router.get("/", async (req, res) => {
     console.log("orders get router");
+    const db = connectDB();
+    const order = await orderModel.find();
+    res.render("orders_manage", { orders : order });
+});
+
+router.get("/:id", async (req, res) => {
+    const db = connectDB();
+    const data = await orderModel.findOne({ orderId : req.params.id });
+    console.log(data);
+    res.render("orders_page", { orders : data });
+});
+
+router.get("/test", async (req, res) => {
+    const db = connectDB();
+    const data = await orderModel.findOne({ orderId : 8});
+    console.log(data);
+    console.log(data.createdAt);
+    console.log(data.createdAt.toString());
+    // console.log(data.createdAt.toUTCString());
+    console.log(data.createdAt.toLocaleString());
 });
 
 
@@ -58,6 +78,31 @@ router.post("/", async (req, res, next) => {
             res.status(500).json({error});
         };
     };
+});
+
+router.post("/message", async (req, res) => {
+    const db = connectDB();
+    const message = req.body.message;
+    const date = new Date();
+    const id = req.body.orderId;
+    const order = await orderModel.findOne({ orderId : id });
+
+    if (order.message.length === 0) {
+        var seqId = 1;
+    } else {
+        // 讓新加入的array[0] auto +1
+        var seqId = order.message[order.message.length - 1][0] + 1;
+    };
+    const data = [seqId, order.account, message, date.toLocaleString()];
+    order.message.push(data);
+    console.log(order);
+    const orderPost = await order.save();
+    res.redirect(`/orders/${id}`);
+});
+
+router.delete("/message", async (req, res) => {
+    console.log("Into delete msg");
+    console.log(req.body.id);
 });
 
 module.exports = router;

@@ -8,7 +8,8 @@ const orderSchema = new mongoose.Schema({
     status : String,
     message : Array
 }, {
-    collection : "order"
+    collection : "order",
+    timestamps : true
 });
 
 const orderModel = mongoose.model("order", orderSchema);

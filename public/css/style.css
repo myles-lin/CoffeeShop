@@ -167,7 +167,7 @@ a {
 
 .content-box {
     padding: 5px;
-    margin: 10px 20px;
+    margin: 10px;
     font-size: 16px;
 }
 
@@ -182,6 +182,18 @@ button {
     width: 100px;
     margin: 10px;
     padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 14px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.btn {
+    width: 80px;
+    margin: 1px;
+    padding: 8px;
     background-color: #007bff;
     color: #fff;
     font-size: 14px;

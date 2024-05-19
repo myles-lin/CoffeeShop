@@ -10,13 +10,13 @@ router.get("/", async (req, res) => {
     //     res.redirect("/error?msg=沒有權限。");
     // };
     const db = connectDB();
-    let product = await productModel.find();
+    const product = await productModel.find();
     res.render("products_manage", { products : product });
 });
 
 router.get("/:id", async (req, res) => {
     const db = connectDB();
-    let result = await productModel.findOne({_id: req.params.id});
+    const result = await productModel.findOne({_id: req.params.id});
     // res.send(result);
     res.render("products_page", { products : result});
 });
