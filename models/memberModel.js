@@ -10,7 +10,7 @@ const memberSchema = new mongoose.Schema({
         type : String,
         required : true
     },
-    nickname : String,
+    name : String,
     address : String
 }, {
     collection : "member"

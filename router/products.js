@@ -17,7 +17,6 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
     const db = connectDB();
     const result = await productModel.findOne({_id: req.params.id});
-    // res.send(result);
     res.render("products_page", { products : result});
 });
 
@@ -39,14 +38,12 @@ router.post("/", async (req, res) => {
         //     content : req.body.content
         // };
         let result = await productModel.insertMany(data);
-        console.log(result);
         res.render("products_add.html");
     };
 });
 
 router.get("/f/search", async (req, res) => {
     const db = connectDB();
-    // console.log(req.query);
     const data = req.query;
     let result = await productModel.find(data);
     if (result.length === 0) {

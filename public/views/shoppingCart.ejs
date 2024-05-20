@@ -82,6 +82,7 @@
             <div class="row_d-flex-col flex-2" style="align-items: center;">
                 <table>
                     <tr>
+                        <th>No.</th>
                         <th>Product Name</th>
                         <th>Quantity</th>
                         <th>Unit Price</th>
@@ -92,10 +93,11 @@
                         let total = 0;
                         cart.forEach(function(item, index) { %>
                     <tr>
-                        <td><%= item.product_name %></td>
-                        <td align="right"><%= item.product_quantity %></td>
-                        <td align="right"><%= item.product_price %></td>
-                        <td align="right"><%= parseFloat(item.product_quantity) * parseFloat(item.product_price) %></td>
+                        <td style="text-align: center;"><%= index + 1 %></td>
+                        <td><a href="/products/<%= item.product_id %>"><%= item.product_name %></a></td>
+                        <td style="text-align: center;"><%= item.product_quantity %></td>
+                        <td style="text-align: right;">$ <%= item.product_price %></td>
+                        <td style="text-align: right;">$ <%= parseFloat(item.product_quantity) * parseFloat(item.product_price) %></td>
                         <input type="hidden" id="product_id_<%= index %>" name="id" value="<%= item.product_id %>">
                         <td><button type="button" class="btn_remove" id="btn_<%= index %>">Remove</button></td>
                     </tr>
@@ -104,8 +106,8 @@
                         })
                     %>
                     <tr>
-                        <td colspan="3" aling="right"><b>Total</b></td>
-                        <td align="right"><%= total %></td>
+                        <td colspan="4" aling="right"><b>Payment</b></td>
+                        <td align="right">$ <%= total %></td>
                         <td>&nbsp;</td>
                     </tr>
                     <%} else { %>
@@ -120,6 +122,12 @@
                 <% if (cart.length > 0) { %>
                 <!-- <a href="/shoppingCart/checkInventory"><button type="button" style="width: auto;">Order this cart</button></a> -->
                 <form action="/orders" method="POST">
+                    <div>
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                        <label for="deliveryAddress">Delivery Address</label>
+                        <input type="text" id="deliveryAddress" name="deliveryAddress" required>
                     <button type="submit" style="width: auto;">Order this cart</button>
                 </form>
                 <% } %>

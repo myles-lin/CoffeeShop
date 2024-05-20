@@ -85,7 +85,7 @@
                     <tr>
                         <th>Order No.</th>
                         <th>Purchaser</th>
-                        <th>Amount</th>
+                        <th>Payment</th>
                         <th>Status</th>
                         <th>Order Date</th>
                         <th>Details</th>
@@ -94,7 +94,7 @@
                     <tr>
                         <td><%= order.orderId %></td>
                         <td><%= order.account %></td>
-                        <td style="text-align: right;"><%= order.totalAmount %></td>
+                        <td style="text-align: right;">$ <%= order.totalAmount %></td>
                         <td style="text-align: center;"><%= order.status %></td>
                         <td><%= order.createdAt.toLocaleString() %></td>
                         <!-- <td style="text-align: right;"><%= order.quantity %></td>

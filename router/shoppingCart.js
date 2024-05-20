@@ -8,7 +8,11 @@ router.get("/", (req, res) => {
     if (!req.session.cart) {
         req.session.cart = [];
     };
-    res.render("shoppingCart", { cart : req.session.cart, error : [] });
+    if (!req.session.userInfo) {
+        res.redirect("/error?msg=請先登入會員。");
+    } else {
+        res.render("shoppingCart", { cart : req.session.cart, error : [] });
+    }
 });
 
 router.post("/", (req, res) => {
@@ -40,27 +44,27 @@ router.post("/", (req, res) => {
     res.redirect("/");
 });
 
-router.post("/checkInventory", async (req, res) => {
-    const cart = req.session.cart;
-    const db = connectDB();
-    let errorList = [];
-    var checkSuccess = true;  // 預設 true 若購物車商品有任何商品不足, 則改為 false, 不進入建立 order 
-    for (let i = 0 ; i < req.session.cart.length ; i++) {
-        let inventory = await productModel.findOne({ _id : req.session.cart[i].product_id });
-        if ( inventory.quantity < req.session.cart[i].product_quantity) {
-            var checkSuccess = false;
-            let error = `"${req.session.cart[i].product_name}" ordered quantity exceeded. [available quantity: ${inventory.quantity}]`;
-            errorList.push(error);
-        };
-    };
+// router.post("/checkInventory", async (req, res) => {
+//     const cart = req.session.cart;
+//     const db = connectDB();
+//     let errorList = [];
+//     var checkSuccess = true;  // 預設 true 若購物車商品有任何商品不足, 則改為 false, 不進入建立 order 
+//     for (let i = 0 ; i < req.session.cart.length ; i++) {
+//         let inventory = await productModel.findOne({ _id : req.session.cart[i].product_id });
+//         if ( inventory.quantity < req.session.cart[i].product_quantity) {
+//             var checkSuccess = false;
+//             let error = `"${req.session.cart[i].product_name}" ordered quantity exceeded. [available quantity: ${inventory.quantity}]`;
+//             errorList.push(error);
+//         };
+//     };
 
-    if (checkSuccess === false) {
-        res.render("shoppingCart", { cart : req.session.cart, error : errorList});
-    } else {
-        console.log("All PASS !!!");
-        res.redirect(307, "/orders");
-    };
-});
+//     if (checkSuccess === false) {
+//         res.render("shoppingCart", { cart : req.session.cart, error : errorList});
+//     } else {
+//         console.log("All PASS !!!");
+//         res.redirect(307, "/orders");
+//     };
+// });
 
 router.delete("/:id", (req, res) => {
     const product_id = req.params.id;

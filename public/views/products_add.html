@@ -17,7 +17,7 @@
                 <li>
                     <a href="/adminAuth">MANAGE</a>
                     <ul>
-                        <li><a href="/products/add">Add Products</a></li>
+                        <li><a href="/products/f/add">Add Products</a></li>
                         <li><a href="/products" >Search Products</a></li>
                         <li><a href="#">Orders</a></li>
                         <li><a href="#">Reviews</a></li>
@@ -49,8 +49,8 @@
                                         <li> <a href="">Latin America</a> </li>  
                                         <li> <a href="">Africa</a> </li>  </ul>  </li>  
                                 <li> <a href="">Brewing Equipment</a>  
-                                    <ul><li> <a href="">LILI</a> </li>  
-                                        <li> <a href="">MHW-3BOMBER</a> </li>  
+                                    <ul><li> <a href="">Brewing Equipment</a> </li>  
+                                        <li> <a href="">grinder</a> </li>  
                                         <li> <a href="">NANA COFFEE ROASTERS</a> </li>  </ul>  </li>    
                             </ul>
                         </div>        
@@ -68,8 +68,9 @@
                         <label for="category">Category</label>
                         <select id="category" name="category" required>
                             <option value="coffee beans" selected>coffee beans</option>
-                            <option value="brewing equipment">brewing equipment</option>
+                            <option value="brewing">brewing</option>
                             <option value="grinder">grinder</option>
+                            <option value="others">others</option>
                         </select>
                     </div>
                     <div>
@@ -100,7 +101,7 @@
                     </div>
                     <div>
                         <label for="content">Content</label><br>
-                        <textarea class="content-box" name="content" rows="5" cols="40">Product description</textarea>
+                        <textarea class="content-box" name="content" rows="5" cols="40" placeholder="Product description"></textarea>
                     </div>
                     <button class="btn" type="submit">submit</button>
                     <div id="btn"></div>

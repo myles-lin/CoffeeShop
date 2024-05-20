@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const connectDB = require("../utils/db");
 const memberModel = require("../models/memberModel");
+const orderModel = require("../models/orderModel");
 
 router.get("/", async (req, res) => {
     console.log(req.session);
@@ -11,32 +12,28 @@ router.get("/", async (req, res) => {
     } else {
         const db = connectDB();
         const userInfo = await memberModel.findOne({ account : req.session.userInfo.name });
-        console.log(userInfo);
-        console.log(userInfo.account);
-        console.log(userInfo.password);
-        console.log(userInfo.nickname);
+        const account = userInfo.account;
+        const orderList = await orderModel.find({ account : account });
 
-        res.render("member", { userInfo : userInfo });
+        res.render("member", { userInfo : userInfo, orders : orderList });
     }
 });
 
 router.put("/:account", async (req, res) => {
-    console.log("put");
     const db = connectDB();
     const result = await memberModel.updateOne({account: req.params.account}, {$set: req.body});
-    res.send(result);
+    res.status(200).send(result);
 });
 
 router.patch("/:id", async (req, res) => {
-    console.log("patch");
     const db = connectDB();
-    const result = await memberModel.updateOne({_id: req.params.id}, {$set: req.body});
-    res.send(result);
-});
-
-router.get("/signout", (req, res) => {
-    req.session.destroy();
-    res.redirect("/");
+    try {
+        const result = await memberModel.updateOne({_id: req.params.id}, {$set: req.body});
+        res.status(200).send({success: true, result});
+    } catch (error) {
+        console.log("member PATCH error:", error);
+        res.status(500).json({error});
+    };
 });
 
 router.get("/api", async (req, res) => {

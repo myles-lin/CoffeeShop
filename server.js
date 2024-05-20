@@ -42,7 +42,11 @@ app.get("/", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-    res.render("login.html");
+    if (req.session.userInfo !== undefined) {
+        res.redirect("/");
+    } else {
+        res.render("login.html");
+    }
 });
 
 app.post("/login", async (req, res, next) => {
@@ -67,6 +71,11 @@ app.post("/login", async (req, res, next) => {
         res.redirect("/");
     }
 );
+
+app.get("/signout", (req, res) => {
+    req.session.destroy();
+    res.redirect("/");
+});
 
 app.get("/error", (req, res) => {
     // let message = "發生錯誤，請聯繫客服。";
