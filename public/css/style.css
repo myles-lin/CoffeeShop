@@ -120,7 +120,7 @@ h3 {
 }
 
 .flex-2 {
-    flex-grow: 4;
+    flex-grow: 4.5;
     height: 100%;
     width: 100%;
     font-size: 17px;
@@ -128,7 +128,7 @@ h3 {
 
 .outer {
     background-color: #d3d7d8;
-    padding: 15px;
+    padding: 10px;
     /* height: 450px; */
 }
 
@@ -159,6 +159,11 @@ a {
     color: #333;
     font-size: 20px;
     line-height: 10px;
+}
+
+.form-upload {
+    color: #333;
+    font-size: 14px;
 }
 
 .form-group div {
@@ -193,7 +198,7 @@ button {
 .btn {
     width: 80px;
     margin: 1px;
-    padding: 8px;
+    padding: 5px;
     background-color: #007bff;
     color: #fff;
     font-size: 14px;
@@ -205,7 +210,7 @@ button {
 .btn_remove {
     width: 80px;
     margin: 1px;
-    padding: 8px;
+    padding: 5px;
     background-color: #dd613b;
     color: #fff;
     font-size: 14px;

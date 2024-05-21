@@ -89,9 +89,10 @@
                         <th>Category</th>
                         <th>RoastLevel</th>
                         <th>Region</th>
-                        <th>Quantity</th>
+                        <th>QTY</th>
                         <th>Price</th>
-                        <th>Content</th>
+                        <!-- <th>Content</th> -->
+                        <th>image upload</th>
                         <th>Delete</th>
                     </tr>
                     <% products.forEach(function(product, index) { %>
@@ -103,7 +104,21 @@
                         <td><%= product.region %></td>
                         <td style="text-align: right;"><%= product.quantity %></td>
                         <td style="text-align: right;"><%= product.price %></td>
-                        <td><%= product.content %></td>
+                        <!-- <td><%= product.content %></td> -->
+                        <td>
+                            <form action="/products/imageUpload" method="POST" class="form-upload" enctype="multipart/form-data">
+                                <input style="font-size: 13px" type="file" name="file">
+                                <input type="hidden" name="product_id" value="<%= product._id %>">
+                                <button class="btn" type="submit">Upload</button>
+                            </form>
+                            <!-- <form action="/products/imageUpload" method="POST" class="form-upload" enctype="multipart/form-data"> -->
+                                <!-- <input style="font-size: 13px" type="file" name="file"> -->
+                                <!-- <button class="btn" type="submit">Upload</button> -->
+                                
+                            <!-- </form> -->
+                            <!-- <input style="font-size: 13px" type="file" name="file">
+                                <input style="font-size: 13px" type="submit" value="Upload"> -->
+                        </td>
                         <td>
                             <input type="hidden" id="product_id_<%= index %>" name="id" value="<%= product._id %>">
                             <button class="btn_remove" id="btn_<%= index %>" type="button">
@@ -114,6 +129,7 @@
                     </tr>
                     <% }); %>
                 </table>
+                
                 <!-- <ul>
                     <% products.forEach(function(product, index) { %>
                         <li>

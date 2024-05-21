@@ -14,7 +14,8 @@ const productSchema = new mongoose.Schema({
     region : String,
     quantity : Number,
     price : Number,
-    content : String
+    content : String,
+    imageUrl : String
 }, {
     collection : "product"
 });

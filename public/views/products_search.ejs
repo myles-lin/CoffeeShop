@@ -85,7 +85,7 @@
                     <% products.forEach(function(product, index) { %>
                     <div class="p-item__listitem">
                         <div class="p-item__img">
-                            <figure class="img__wrap"><a href="/products/<%= product._id %>"><img loading="lazy" src="https://baseec-img-mng.akamaized.net/images/item/origin/a6b6da597195093f45a750a648d42dbf.png?imformat=generic&amp;q=90&amp;im=Resize,width=640,type=normal" alt="Indonesia-Hans/Sukasari - West Java/Typica/Anaerobic Natural/Light" title="Indonesia-Hans/Sukasari - West Java/Typica/Anaerobic Natural/Light" class="image-resize"></a></figure>
+                            <figure class="img__wrap"><a href="/products/<%= product._id %>"><img loading="lazy" src="<%= product.imageUrl %>?imformat=generic&amp;q=90&amp;im=Resize,width=640,type=normal" alt="Indonesia-Hans/Sukasari - West Java/Typica/Anaerobic Natural/Light" title="Indonesia-Hans/Sukasari - West Java/Typica/Anaerobic Natural/Light" class="image-resize"></a></figure>
                         </div>
                     <a class="p-item__contents" href="/products/<%= product._id %>">
                         <h2 class="p-item__title"><%= product.name %></h2>
