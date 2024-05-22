@@ -34,18 +34,19 @@ const membersRouter = require("./router/members");
 const productsRouter = require("./router/products");
 const shoppingCartRouter = require("./router/shoppingCart");
 const ordersRouter = require("./router/orders");
-const booksRouter = require("./router/books");
+
+
 
 app.get("/", (req, res) => {
-    console.log(req.session);
-    res.render("index.html");
+
+    res.render("index",{manageHeader : req.session});
 });
 
 app.get("/login", (req, res) => {
     if (req.session.userInfo !== undefined) {
         res.redirect("/");
     } else {
-        res.render("login.html");
+        res.render("login", {manageHeader : req.session});
     }
 });
 
@@ -59,7 +60,7 @@ app.post("/login", async (req, res, next) => {
             { password : password}
         ]
     });
-    // console.log(result);
+
     if (result !== null) {
         next();
     } else {
@@ -78,9 +79,8 @@ app.get("/signout", (req, res) => {
 });
 
 app.get("/error", (req, res) => {
-    // let message = "發生錯誤，請聯繫客服。";
     let message = req.query.msg;
-    res.render("error.html", { message : message });
+    res.render("error", { message : message, manageHeader : req.session});
 });
 
 // 將 /members 的 requests, 導入到 booksRouter 處理
@@ -90,7 +90,6 @@ app.use("/members", membersRouter);
 app.use("/products", productsRouter);
 app.use("/shoppingCart", shoppingCartRouter);
 app.use("/orders", ordersRouter);
-app.use("/books", booksRouter);
 
 app.listen(portNum, ()=>{
     console.log(`Server is running at localhost:${portNum}`);

@@ -6,30 +6,62 @@ const productModel = require("../models/productModel");
 const fs = require("fs");
 
 router.get("/", async (req, res) => {
-    // if (!req.session.userInfo ||req.session.userInfo.name !== "admin" || req.session.userInfo.isLogined !== true) {
-    //     res.redirect("/error?msg=沒有權限。");
-    // };
-    const db = connectDB();
-    const product = await productModel.find();
-    res.render("products_manage", { products : product });
+    try {
+        if (req.session.userInfo === undefined || req.session.userInfo.account !== "admin") {
+            return res.status(403).send({ message : "Permission Denied"});
+        };
+        const db = connectDB();
+        // sort list by pid
+        const product = await productModel.find().sort({pid: 1});
+        res.render("products_manage", { products : product });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send({error : error.message});
+    };
 });
 
 router.get("/:id", async (req, res) => {
     const db = connectDB();
-    const result = await productModel.findOne({_id: req.params.id});
-    res.render("products_page", { products : result});
+    try {
+        const result = await productModel.findOne({_id: req.params.id});
+        res.render("products_page", { products : result, manageHeader : req.session});
+
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send({error : error.message});
+    };
 });
 
 router.post("/", async (req, res) => {
     const db = connectDB();
-    const data = req.body;
-    console.log(data);
-    let result = await productModel.findOne({ name : req.body.name });
-    if (result !== null) {
-        res.redirect("/error?msg=商品名稱重複，請重新檢查。");
-    } else {
-        let result = await productModel.insertMany(data);
-        res.render("products_add.html");
+    try {
+        // permission control
+        if (req.session.userInfo.account !== "admin") {
+            return res.status(403).send({ message : "Permission Denied"});
+        };
+        
+        const data = req.body;
+        console.log(data);
+        let result = await productModel.findOne({ name : req.body.name });
+        if (result !== null) {
+            res.redirect("/error?msg=商品名稱重複，請重新檢查。");
+        } else {
+
+            // // AUTO INCREMENT pid (+1)
+            const getLastItem = await productModel.find().sort({pid: -1}).limit(1);
+                if (getLastItem.length === 0) {
+                    var seqId = 1;
+                } else {
+                    var seqId = getLastItem[0].pid + 1;
+                };
+            console.log("seqId",seqId);
+            data["pid"] =  seqId;
+            let result = await productModel.insertMany(data);
+            res.render("products_add.html");
+        };
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send({error : error.message});
     };
 });
 
@@ -73,6 +105,11 @@ const upload = multer({storage, fileFilter, limits : { fileSize : 1000000} });
 router.post("/imageUpload", upload.single("file"), async (req, res) => {    
     if (req.file) {
         try {
+            // permission control
+            if (req.session.userInfo.account !== "admin") {
+                return res.status(403).send({ message : "Permission Denied"});
+            };
+
             let date = new Date();
             date = date.toISOString().replaceAll("-","").replaceAll(":","").replace("T","").split(".")[0];
             const filename = date + "-" + req.file.originalname;
@@ -90,44 +127,96 @@ router.post("/imageUpload", upload.single("file"), async (req, res) => {
             console.log(imageUrl);
 
             const imageUpdate = await productModel.updateOne({_id: req.body.product_id}, {$set: {imageUrl : imageUrl}});
-            res.send(imageUpdate);
+            res.redirect("/products");
+            // res.send(imageUpdate);
         } catch (error) {
-            console.log(error);
-            res.status(500).send("upload failed");
+            console.error(error.message);
+            res.status(500).send({ message : "upload failed"});
         }
     } else {
-        res.status(400).send("no file chosen");
+        res.status(400).send({ message : "no file chosen"});
     };
 
 });
 
-
 router.get("/f/search", async (req, res) => {
     const db = connectDB();
-    const data = req.query;
-    let result = await productModel.find(data);
-    if (result.length === 0) {
-        res.send("There's no items for sale.");
-    } else {
-        res.render("products_search",{ products : result });
-    }
+    try {
+        const data = req.query;
+        let result = await productModel.find(data);
+        if (result.length === 0) {
+            // res.send("There's no items for sale.");
+            res.redirect("/error?msg=There's no items for sale.")
+        } else {
+            res.render("products_search",{ products : result, manageHeader : req.session });
+        };
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send({error : error.message});
+    };
 });
 
 router.get("/f/add", (req, res) => {
     res.render("products_add.html");
 });
 
+router.get("/f/edit", async (req, res) => {
+    const db = connectDB();
+    try {
+        // permission control
+        if (req.session.userInfo.account !== "admin") {
+            return res.status(403).send({ message : "Permission Denied"});
+        };
+
+        const productInfo = await productModel.findOne({ _id : req.query.product_id });
+        var shortUrl = "no imageUrl found";
+        if (productInfo.imageUrl) {
+            var shortUrl = productInfo.imageUrl.split("com")[1]; };
+        res.render("products_edit", { product : productInfo, shortUrl : shortUrl});
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send({error : error.message});
+    };
+});
+
+
+router.patch("/:id", async (req, res) => {
+    const db = connectDB();
+    try {
+        // permission control
+        if (req.session.userInfo.account !== "admin") {
+            return res.status(403).send({ message : "Permission Denied"});
+        };
+
+        const result = await productModel.updateOne({_id: req.params.id}, {$set: req.body});
+        res.status(200).send({success: true, result});
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send({error : error.message});
+    };
+});
+
 router.delete("/:id", async (req, res) => {
     const db = connectDB();
-    const result = await productModel.deleteOne({_id : req.params.id});
-    console.log(result);
-    res.status(200).send({ success: true, result });
+    try {
+        // permission control
+        if (req.session.userInfo.account !== "admin") {
+            return res.status(403).send({ message : "Permission Denied"});
+        };
+
+        const result = await productModel.deleteOne({_id : req.params.id});
+        console.log(result);
+        res.status(200).send({ success: true, result });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send({error : error.message});
+    };
 });
 
 
 // 把所有產品直接導入 products table
 router.post("/test", async (req, res) => {
-    let obj = JSON.parse(fs.readFileSync("./raw_data.json", 'utf8'));
+    let obj = JSON.parse(fs.readFileSync("./raw_data2.json", 'utf8'));
     console.log(obj);
     const db = connectDB();
     let result = await productModel.insertMany(obj);

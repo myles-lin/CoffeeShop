@@ -7,6 +7,37 @@
     <title>Code Coffee</title>
     <link rel="stylesheet" href="/css/style.css" type="text/css">
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script>
+        $(function(){
+            $("#btn").click(() => {
+                const data = { category : $("#category").val(),
+                                roastLevel : $("#roastlevel").val(),
+                                region : $("#region").val(),
+                                quantity : $("#quantity").val(),
+                                price : $("#price").val(),
+                                content : $("#content").val()
+                            };
+
+                $.ajax({
+                    url  : "/products/" + "<%= product._id %>",
+                    type : "PATCH",
+                    data : data,
+                    dataType: "json"
+                })
+                .then(res => {
+                    console.log(res);
+                    $("#submit_wording").text("update completed");
+                    setTimeout(function(){
+                        window.location.reload(); 
+                    }, 2000);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+            });
+
+        });
+    </script>
 </head>
 <body>
     <header>
@@ -58,52 +89,62 @@
 
             <div class="row flex-2">
                 <form action="/products" method="POST" id="form-product" class="form-group">
-                    <h3 style="margin-bottom: 20px;">Add new product</h3>
+                    <h3 style="margin-bottom: 20px;">Edit Product</h3>
                     <div>
                         <label for="name">Name</label>
-                        <input style="margin-left: 28px;" type="text" id="name" name="name" required>
+                        <!-- <input style="margin-left: 28px;" type="text" id="name" name="name" required> -->
+                        <%= product.name %>
                     </div>
                     <div>
                         <label for="category">Category</label>
                         <select id="category" name="category" required>
-                            <option value="coffee beans" selected>coffee beans</option>
+                            <option value="<%= product.category %>" selected><%= product.category %></option>
+                            <option disabled>-----</option>
+                            <option value="coffee beans">coffee beans</option>
                             <option value="brewing">brewing</option>
                             <option value="grinder">grinder</option>
                             <option value="others">others</option>
                         </select>
                     </div>
                     <div>
-                        <label for="category">Roast Level</label>
-                        <select id="roastlevle" name="roastLevel">
-                            <option value="none" selected>none</option>
+                        <label for="roast Level">Roast Level</label>
+                        <select id="roastlevel" name="roastLevel">
+                            <option value="<%= product.roastLevel %>" selected><%= product.roastLevel %></option>
+                            <option disabled>-----</option>
+                            <option value="none">none</option>
                             <option value="light roast">light roast</option>
                             <option value="medium roast">medium roast</option>
                             <option value="dark roast">dark roast</option>
                         </select>
                     </div>
                     <div>
-                        <label for="category">Region</label>
+                        <label for="region">Region</label>
                         <select style="margin-left: 15px;" id="region" name="region">
-                            <option value="none" selected>none</option>
+                            <option value="<%= product.region %>" selected><%= product.region %></option>
+                            <option disabled>-----</option>
+                            <option value="none">none</option>
                             <option value="asia">asia</option>
                             <option value="latin america">latin america</option>
                             <option value="africa">africa</option>
                         </select>
                     </div>
                     <div>
-                        <label for="category">Quantity</label>
-                        <input type="number" id="quantity" name="quantity" min="1" required>
+                        <label for="quantity">Quantity</label>
+                        <input type="number" id="quantity" name="quantity" min="1" value="<%= product.quantity %>" required>
                     </div>
                     <div>
-                        <label for="category">Price</label>
-                        <input style="margin-left: 28px;" type="number" id="price" name="price" min="1" required>
+                        <label for="price">Price</label>
+                        <input style="margin-left: 28px;" type="number" id="price" name="price" min="1" value="<%= product.price %>" required>
+                    </div>
+                    <div>
+                        <label for="image url">Image Url</label>
+                        <a href="<%= product.imageUrl %>"><%= shortUrl %></a>
                     </div>
                     <div>
                         <label for="content">Content</label><br><br><br>
-                        <textarea class="content-box" name="content" rows="10" cols="100" placeholder="Product description"></textarea>
+                        <textarea class="content-box" id="content" name="content" rows="10" cols="100" placeholder="Product description"><%= product.content %></textarea>
                     </div>
-                    <button type="submit">submit</button>
-                    <div id="btn"></div>
+                    <button type="button" id="btn">submit</button><span id="submit_wording"></span>
                 </form>
                 <!-- <form method="POST" action="/products/test">
                 <button type="submit">Upload raw data</button>

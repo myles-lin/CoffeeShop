@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Member Page</title>
+    <title>Code Coffee</title>
     <link rel="stylesheet" href="/css/style.css" type="text/css">
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script>
@@ -24,7 +24,9 @@
                 .then(res => {
                     console.log(res);
                     $("#submit_wording").text("update completed");
-                    // window.location.reload("");
+                    setTimeout(function(){
+                        window.location.reload(); 
+                    }, 2000);
                 })
                 .catch(err => {
                     console.log(err);
@@ -36,23 +38,25 @@
 </head>
 <body>
     <header>
-        <h1 style="position: absolute;left: 120px;top: 0;line-height: 80px;">扣咖啡</h1>
+        <h1 style="position: absolute;left: 80px;top: 0;line-height: 80px;">Code Coffee</h1>
         <nav>
             <ul>
+                <% if (manageHeader.userInfo !== undefined && manageHeader.userInfo.account === "admin") { %>
                 <li>
-                    <a href="/adminAuth">MANAGE</a>
+                    <a>MANAGE</a>
                     <ul>
-                        <li><a href="/products/add">Add Products</a></li>
+                        <li><a href="/products/f/add">Add Products</a></li>
                         <li><a href="/products">Manage Products</a></li>
-                        <li><a href="#">Orders</a></li>
+                        <li><a href="/orders">Orders</a></li>
                         <li><a href="#">Reviews</a></li>
                     </ul>
                 </li>
+                <% } %>
                 <li><a href="/">Home</a></li>
                 <li><a href="/members">MEMBER</a></li>
-                <li><a href="#">CART</a></li>
+                <li><a href="/shoppingCart">CART</a></li>
                 <li><a href="/login">SIGNIN</a></li>
-                <li><a href="/members/signout">SIGNOUT</a></li>
+                <li><a href="/signout">SIGNOUT</a></li>
              </ul>
        </nav>
     </header>
@@ -62,21 +66,21 @@
         <div class="d-flex outer">
             <div class="row">
                 <div id="category-menu">
-                    <p class="gnav__link">CATEGORY</p>
+                    <p class="gnav__link"><h3>CATEGORY</h3></p>
                         <div class="category-list"> 
                             <ul>
-                                <li> <a href="">Roast Level</a>
-                                    <ul><li><form action="/products/search" method="GET"> <input type="hidden" name="roastLevel" value="light roast"/> <input type="submit" value="Light roast"> </form></li>  
-                                        <li><form action="/products/search" method="GET"> <input type="hidden" name="roastLevel" value="medium roast"/> <input type="submit" value="Medium roast"> </form></li>  
-                                        <li><form action="/products/search" method="GET"> <input type="hidden" name="roastLevel" value="dark roast"/> <input type="submit" value="Dark roast"></form>  </li>  </ul>  </li>  
-                                <li> <a href="">Region</a>  
-                                    <ul><li> <a href="">Asia / Oceania</a> </li>  
-                                        <li> <a href="">Latin America</a> </li>  
-                                        <li> <a href="">Africa</a> </li>  </ul>  </li>  
-                                <li> <a href="">Brewing Equipment</a>  
-                                    <ul><li> <a href="">LILI</a> </li>  
-                                        <li> <a href="">MHW-3BOMBER</a> </li>  
-                                        <li> <a href="">NANA COFFEE ROASTERS</a> </li>  </ul>  </li>    
+                                <li> <a>Roast Level</a>
+                                    <ul><li><form action="/products/f/search" method="GET"> <input type="hidden" name="roastLevel" value="light roast"/> <input type="submit" value="Light roast"> </form></li>  
+                                        <li><form action="/products/f/search" method="GET"> <input type="hidden" name="roastLevel" value="medium roast"/> <input type="submit" value="Medium roast"> </form></li>  
+                                        <li><form action="/products/f/search" method="GET"> <input type="hidden" name="roastLevel" value="dark roast"/> <input type="submit" value="Dark roast"></form>  </li>  </ul>  </li>  
+                                <li> <a>Region</a>  
+                                    <ul><li><form action="/products/f/search" method="GET"> <input type="hidden" name="region" value="asia"/> <input type="submit" value="Asia"> </form></li>  
+                                        <li><form action="/products/f/search" method="GET"> <input type="hidden" name="region" value="latin america"/> <input type="submit" value="Latin America"> </form></li>  
+                                        <li><form action="/products/f/search" method="GET"> <input type="hidden" name="region" value="africa"/> <input type="submit" value="Africa"> </form> </li>  </ul>  </li>  
+                                <li> <a href="">Equipment</a>  
+                                    <ul><li><form action="/products/f/search" method="GET"> <input type="hidden" name="category" value="brewing"/> <input type="submit" value="Coffee Brewing"> </form> </li>  
+                                        <li><form action="/products/f/search" method="GET"> <input type="hidden" name="category" value="grinder"/> <input type="submit" value="Coffee Grinder"> </form> </li>  
+                                        <li><form action="/products/f/search" method="GET"> <input type="hidden" name="category" value="others"/> <input type="submit" value="Others"> </form> </li>  </ul>  </li>    
                             </ul>
                         </div>        
                 </div>
@@ -123,36 +127,12 @@
                 <div class="error-message"></div>
             </div>
         </div>
-    </div>
+        </div>
     </nav>
     </main>
 <footer>
-    <p>ddd</p>
+    <p></p>
 </footer>
 
 </body>
 </html> 
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Member Page</title>
-    <link rel="stylesheet" href="../css/style.css">
-</head>
-<body>
-    <div class="container">
-        <h2>會員頁面</h2>
-    </div>
-    <div class="container">
-        <div style="text-align: right; margin-top: 20px">
-            <button><a href="/adminAuth">前往管理者頁面</a></button>
-        </div>
-        <div style="text-align: right; margin-top: 20px">
-            <button><a href="/members/signout">Singout</a></button>
-        </div>
-        <div class="error-message"></div>
-    </div>
-</body>
-</html> -->

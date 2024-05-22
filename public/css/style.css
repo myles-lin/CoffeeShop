@@ -147,6 +147,8 @@ select {
 label {
     padding: 20px;
     margin-bottom: 5px;
+    font-size: 17px;
+    font-weight: 700;
 }
 
 a {
@@ -161,19 +163,15 @@ a {
     line-height: 10px;
 }
 
-.form-upload {
-    color: #333;
-    font-size: 14px;
-}
-
 .form-group div {
     padding: 5px 0px;
 }
 
 .content-box {
     padding: 5px;
-    margin: 10px;
+    /* margin: 5px; */
     font-size: 16px;
+    white-space: pre-wrap;
 }
 
 .text_link {
@@ -222,6 +220,12 @@ button {
 
 button:hover {
     background-color: #c2ab9f;
+}
+
+.image-resize {
+    /* height: 500px;
+    width: 640px; */
+    object-fit: scale-down;
 }
 
 table {
@@ -360,6 +364,7 @@ img {
 .p-item__title  {
 	display: block;
 	width: 100%;
+    font-size: 18px;
 	font-weight: 700;
 	line-height: 1.4;
 }
@@ -370,10 +375,11 @@ img {
     color: red;
     margin-top: 10px;
     margin-bottom: 20px;
+    font-size: 22px;
     text-align: center;
 }
 
 footer {
-    height: 100%;
+    height: auto;
     background-color: #d3d7d8;
 }
