@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: unless-stopped
+    network_mode: bridge
+    ports:
+      - 6379:6379
+      
+  node-app:
+    image: node_test:1.0.1
+    container_name: nodeJS_app
+    restart: unless-stopped
+    network_mode: bridge
+    ports:
+      - 3000:3000
+    depends_on:
+      - redis
+    links:
+      - redis
