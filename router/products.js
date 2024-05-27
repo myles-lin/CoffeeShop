@@ -143,7 +143,9 @@ router.get("/f/search", async (req, res) => {
     const db = connectDB();
     try {
         const data = req.query;
-        let result = await productModel.find(data);
+        const key = Object.keys(req.query)[0];
+        const value = Object.values(req.query)[0];
+        let result = await productModel.find({ [key] : { $regex : value, $options : 'i' }});  // 查詢不分大小寫
         if (result.length === 0) {
             // res.send("There's no items for sale.");
             res.redirect("/error?msg=There's no items for sale.")

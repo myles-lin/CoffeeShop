@@ -38,11 +38,11 @@
         <nav>
             <ul>
                 <li>
-                    <a href="/adminAuth">MANAGE</a>
+                    <a>MANAGE</a>
                     <ul>
                         <li><a href="/products/add">Add Products</a></li>
                         <li><a href="/products" >Manage Products</a></li>
-                        <li><a href="#">Orders</a></li>
+                        <li><a href="/orders">Orders</a></li>
                         <li><a href="#">Reviews</a></li>
                     </ul>
                 </li>
@@ -60,6 +60,10 @@
         <div class="d-flex outer">
             <div class="row">
                 <div id="category-menu">
+                    <form action="/products/f/search" method="GET">
+                        <input type="search" name="name" placeholder="Press enter to search">
+                    </form>
+                    <br>
                     <p class="gnav__link"><h3>CATEGORY</h3></p>
                         <div class="category-list"> 
                             <ul>

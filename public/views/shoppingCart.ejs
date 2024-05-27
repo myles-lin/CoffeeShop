@@ -36,7 +36,7 @@
         <h1 style="position: absolute;left: 80px;top: 0;line-height: 80px;">Code Coffee</h1>
         <nav>
             <ul>
-                <% if (manageHeader.userInfo !== undefined && manageHeader.userInfo.name === "admin") { %>
+                <% if (manageHeader.userInfo !== undefined && manageHeader.userInfo.account === "admin") { %>
                 <li>
                     <a>MANAGE</a>
                     <ul>
@@ -61,6 +61,10 @@
         <div class="d-flex outer">
             <div class="row">
                 <div id="category-menu">
+                    <form action="/products/f/search" method="GET">
+                        <input type="search" name="name" placeholder="Press enter to search">
+                    </form>
+                    <br>
                     <p class="gnav__link"><h3>CATEGORY</h3></p>
                         <div class="category-list"> 
                             <ul>

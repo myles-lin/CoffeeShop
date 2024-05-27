@@ -251,6 +251,15 @@ input[type="submit"] {
     cursor: pointer;
 }
 
+input[type=search] {
+    width: auto;
+    height: 40px;
+    font-size: 16px;
+    padding: 0px 20px 0px 20px;
+    border-radius: 15px;
+    outline: none;
+    border: solid gray 2px;
+}
 
 /*- product page setting start -*/
 .p-item__list {
@@ -382,4 +391,13 @@ img {
 footer {
     height: auto;
     background-color: #d3d7d8;
+}
+
+
+/* item search */
+.itemSearch__form {
+    border: 1px solid var(--NavTextColorBgOn);
+}
+.itemSearch__btn {
+    border-left: 1px solid var(--NavTextColorBgOn);
 }

@@ -62,6 +62,10 @@
         <div class="d-flex outer">
             <div class="row">
                 <div id="category-menu">
+                    <form action="/products/f/search" method="GET">
+                        <input type="search" name="name" placeholder="Press enter to search">
+                    </form>
+                    <br>
                     <p class="gnav__link"><h3>CATEGORY</h3></p>
                         <div class="category-list"> 
                             <ul>
@@ -143,7 +147,7 @@
                     <tr>
                         <td>
                             <input type="hidden" id="msg_id_<%= index %>" value="<%= orders.message[i][0] %>">
-                            <div>user : <%= orders.message[i][1] %></div>
+                            <div class="p-item__title">user : <%= orders.message[i][1] %></div>
                             <div><%= orders.message[i][2] %></div>
                             <div style="text-align: right;"><%= orders.message[i][3].toLocaleString('zh-TW') %></div>
                         </td>
