@@ -9,7 +9,7 @@ services:
       - 6379:6379
       
   node-app:
-    image: node_test:1.0.1
+    image: node_test:1.0.2
     container_name: nodeJS_app
     restart: unless-stopped
     network_mode: bridge

@@ -216,7 +216,7 @@ router.delete("/:id", async (req, res) => {
 
 // 把所有產品直接導入 products table
 router.post("/test", async (req, res) => {
-    let obj = JSON.parse(fs.readFileSync("./raw_data2.json", 'utf8'));
+    let obj = JSON.parse(fs.readFileSync("../raw/raw_data2.json", 'utf8'));
     console.log(obj);
     const db = connectDB();
     let result = await productModel.insertMany(obj);
