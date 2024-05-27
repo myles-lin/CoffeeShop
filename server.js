@@ -10,10 +10,10 @@ const session = require("express-session");
 
 const redis = require("redis");
 const redisClient = redis.createClient({
-    socket: {           /* run backend and redis docker container by docker-compose up */
-        port: 6379,
-        host: "redis"
-    }
+    // socket: {           /* run backend and redis docker container by docker-compose up */
+    //     port: 6379,
+    //     host: "redis"
+    // }
 }); 
 
 redisClient.connect().catch(err => {console.error(err.message)}); // redis ver.4 cosnnect operation

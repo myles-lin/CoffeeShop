@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Search</title>
+    <title>Code Coffee</title>
     <link rel="stylesheet" href="/css/style.css" type="text/css">
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
@@ -62,21 +62,28 @@
                 </div>
             </div>
 
-            <div class="row flex-2">
-                <div id="itemIndex" class="p-item__list">
-                    <% products.forEach(function(product, index) { %>
-                    <div class="p-item__listitem">
-                        <div class="p-item__img">
-                            <figure class="img__wrap"><a href="/products/<%= product._id %>"><img loading="lazy" src="<%= product.imageUrl %>?imformat=generic&amp;q=90&amp;im=Resize, width=640,type=normal" alt="<%= product.name %>" title="" class="image-resize"></a></figure>
-                        </div>
-                    <a class="p-item__contents" href="/products/<%= product._id %>">
-                        <h2 class="p-item__title"><%= product.name %></h2>
-                        <ul class="p-item__detail">
-                        <li class="p-item__price">＄<%= product.price %></li>
-                        </ul></a>
-                    </div>
+            <div class="row_d-flex-col flex-2" style="align-items: center;">
+                <h2>Members List</h2>
+                <br>
+                <table>
+                    <tr>
+                        <th>No.</th>
+                        <th>Account</th>
+                        <th>Password</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                    </tr>
+                    <% members.forEach(function(member, index) { %>
+                    <tr>
+                        <td><%= index+1 %></td>
+                        <td><%= member.account %></td>
+                        <td><%= member.password %></td>
+                        <td><%= member.name %></td>
+                        <td><%= member.address %></td>
+                    </tr>
                     <% }); %>
-                </div>
+                </table>
+                <div class="error-message"></div>
             </div>
         </div>
         </div>
