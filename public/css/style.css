@@ -257,6 +257,8 @@ li .left_c1 {
 
 input {
     padding: 5px;
+    border-radius: 5px;
+    border: solid gray 1px;
 }
 
 input[type="submit"] {
