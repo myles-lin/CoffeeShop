@@ -3,8 +3,8 @@
 1. #### [專案摘要](#專案摘要)
 2. #### [技術架構](#技術架構)    
 3. #### [後端開發](#後端開發)
-    - [**Database Schema**](#Database%20Schema)
-    - [**RESTful API**](#RESTful%20API)
+    - [**Database Schema**](#Database-Schema)
+    - [**RESTful API**](#RESTful-API)
 
 ## 專案摘要
 「CoffeeShop」是一個咖啡電商網站，為店家提供販售咖啡商品的服務，包含會員、商品、購物車、訂單系統，店家能夠修改商品內容及管理訂單。
