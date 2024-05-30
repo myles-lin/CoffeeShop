@@ -153,7 +153,7 @@ router.post("/", async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.end();
+        res.send(error);
     };
 })
 
@@ -211,7 +211,8 @@ router.get("/linePay/confirm", async (req,res) => {
             res.redirect(`/orders/${seqId}`);   
             };
     } catch (error) {
-        res.end();
+        console.log(error);
+        res.send(error);
     };
 });
 
