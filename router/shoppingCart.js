@@ -6,18 +6,18 @@ const productModel = require("../models/productModel");
 
 router.get("/", (req, res) => {
     if (!req.session.cart) {
-        req.session.cart = [];
+        req.session.cart = { products : [] };
     };
     if (!req.session.userInfo) {
         res.redirect("/error?msg=Please login first");
     } else {
-        res.render("shoppingCart", { cart : req.session.cart, error : [] , manageHeader : req.session});
+        res.render("shoppingCart", { cart : req.session.cart.products, error : [] , manageHeader : req.session});
     }
 });
 
 router.post("/", (req, res) => {
     if (!req.session.cart) {
-        req.session.cart = [];
+        req.session.cart = { products : [] };
     }
 
     const product_id = req.body.product_id;
@@ -26,30 +26,30 @@ router.post("/", (req, res) => {
     const product_price = req.body.product_price;
     
     let existInCart = false;
-    for (let i = 0 ; i < req.session.cart.length ; i++) {
-        if (req.session.cart[i].product_id === product_id) {
-            req.session.cart[i].product_quantity += parseFloat(product_quantity);
+    for (let i = 0 ; i < req.session.cart.products.length ; i++) {
+        if (req.session.cart.products[i]._id === product_id) {
+            req.session.cart.products[i].quantity += parseFloat(product_quantity);
             existInCart = true;
         }
     }
     if (existInCart === false) {
         const cart_data = {
-            product_id : product_id,
-            product_name : product_name,
-            product_quantity : parseFloat(product_quantity),
-            product_price : parseFloat(product_price),
+            _id : product_id,
+            name : product_name,
+            quantity : parseFloat(product_quantity),
+            price : parseFloat(product_price),
         };
-        req.session.cart.push(cart_data);
+        req.session.cart.products.push(cart_data);
     };
     res.redirect("/");
 });
 
 router.delete("/:id", (req, res) => {
     const product_id = req.params.id;
-    let data = req.session.cart;
-    for (let i = 0 ; i < req.session.cart.length ; i++) {
-        if (req.session.cart[i].product_id === product_id) {
-            req.session.cart.splice(i, 1);
+    let data = req.session.cart.products;
+    for (let i = 0 ; i < req.session.cart.products.length ; i++) {
+        if (req.session.cart.products[i]._id === product_id) {
+            req.session.cart.products.splice(i, 1);
         };
     };
     res.status(200).send({ success: true, data });

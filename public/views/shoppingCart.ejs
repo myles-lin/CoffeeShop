@@ -21,7 +21,7 @@
                 })
                 .then(res => {
                     console.log(res);
-                    window.location.reload();
+                    window.location.assign('/shoppingCart');
                 })
                 .catch(err => {
                     console.log(err);
@@ -100,15 +100,15 @@
                         cart.forEach(function(item, index) { %>
                     <tr>
                         <td style="text-align: center;"><%= index + 1 %></td>
-                        <td><a href="/products/<%= item.product_id %>"><%= item.product_name %></a></td>
-                        <td style="text-align: center;"><%= item.product_quantity %></td>
-                        <td style="text-align: right;">$ <%= item.product_price %></td>
-                        <td style="text-align: right;">$ <%= parseFloat(item.product_quantity) * parseFloat(item.product_price) %></td>
-                        <input type="hidden" id="product_id_<%= index %>" name="id" value="<%= item.product_id %>">
+                        <td><a href="/products/<%= item._id %>"><%= item.name %></a></td>
+                        <td style="text-align: center;"><%= item.quantity %></td>
+                        <td style="text-align: right;">$ <%= item.price %></td>
+                        <td style="text-align: right;">$ <%= parseFloat(item.quantity) * parseFloat(item.price) %></td>
+                        <input type="hidden" id="product_id_<%= index %>" name="id" value="<%= item._id %>">
                         <td><button type="button" class="btn_remove" id="btn_<%= index %>">Remove</button></td>
                     </tr>
                     <% 
-                        total += parseFloat(item.product_quantity) * parseFloat(item.product_price);
+                        total += parseFloat(item.quantity) * parseFloat(item.price);
                         })
                     %>
                     <tr>

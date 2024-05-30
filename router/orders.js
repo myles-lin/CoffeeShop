@@ -5,6 +5,37 @@ const productModel = require("../models/productModel");
 const orderModel = require("../models/orderModel");
 const memberModel = require("../models/memberModel");
 
+/* LinePay setting */
+require("dotenv").config();
+const axios = require("axios");
+const { HmacSHA256 } = require("crypto-js");
+const Base64 = require('crypto-js/enc-base64');
+const {
+    LINEPAY_CHANNEL_ID,
+    LINEPAY_CHANNEL_SECRET_KEY,
+    LINEPAY_VERSION,
+    LINEPAY_SITE,
+    LINEPAY_RETURN_HOST,
+    LINEPAY_RETURN_CONFIRM_URL,
+    LINEPAY_RETURN_CANCEL_URL,
+} = process.env;
+
+function createSignature(uri, linePayBody) {
+    const nonce = parseInt(new Date().getTime() / 1000);
+    const string = `${LINEPAY_CHANNEL_SECRET_KEY}/${LINEPAY_VERSION}${uri}${JSON.stringify(linePayBody)}${nonce}`;
+    // 使用 crypto-js 套件, SHA256 進行加密, 最後轉成字串
+    const signature = Base64.stringify(HmacSHA256(string, LINEPAY_CHANNEL_SECRET_KEY));
+
+    const headers = {
+        'Content-Type': 'application/json',
+        'X-LINE-ChannelId': LINEPAY_CHANNEL_ID,
+        'X-LINE-Authorization-Nonce': nonce,
+        'X-LINE-Authorization': signature
+    };
+    return headers;
+}
+/* LinePay setting end*/
+
 router.get("/", async (req, res) => {
     try {
         // permission control
@@ -37,65 +68,150 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+    // reset req.session.cart.paymentInfo
+    delete req.session.cart.paymentInfo;
+
     // check products inventory
-    const cart = req.session.cart;
+    const cartProudct = req.session.cart.products;
     const db = connectDB();
     try {
-        let errorList = [];
+        var errorList = [];
         var totalAmount = 0;
         var checkSuccess = true;  // 預設 true 若購物車商品有任何商品不足, 則改為 false, 不進入建立 order 
-        for (let i = 0 ; i < req.session.cart.length ; i++) {
-            let inventory = await productModel.findOne({ _id : req.session.cart[i].product_id });
-            totalAmount += req.session.cart[i].product_quantity * req.session.cart[i].product_price;
-            if ( inventory.quantity < req.session.cart[i].product_quantity) {
+        for (let i = 0 ; i < cartProudct.length ; i++) {
+            let inventory = await productModel.findOne({ name : cartProudct[i].name });
+            totalAmount += cartProudct[i].quantity * cartProudct[i].price;
+            if ( inventory.quantity < cartProudct[i].quantity) {
                 var checkSuccess = false;
-                let error = `"${req.session.cart[i].product_name}" ordered quantity exceeded. [available quantity: ${inventory.quantity}]`;
+                let error = `"${cartProudct[i].name}" ordered quantity exceeded. [available quantity: ${inventory.quantity}]`;
                 errorList.push(error);
             };
         };
+        req.session.cart.paymentInfo = { 
+            amount : totalAmount,
+            recipientName : req.body.name,
+            deliveryAddress : req.body.deliveryAddress
+        };
+        
     } catch (error) {
         console.error(error.message);
         res.status(500).send({error : error.message});
     };
 
     if (checkSuccess === false) {
-        return res.render("shoppingCart", { cart : req.session.cart, error : errorList});
+        return res.render("shoppingCart", { cart : req.session.cart.products, error : errorList, manageHeader : req.session });
     };
 
     try {
-        // 訂單全部商品數量正確, 更新product table數量, 開始下訂單
+        // 訂單全部商品數量正確, 轉向第三方支付 linepay     
 
-        // AUTO INCREMENT orderID (+1)
-        const getLastItem = await orderModel.find().sort({orderId: -1}).limit(1);
-        if (getLastItem.length === 0) {
-            var seqId = 1;
-        } else {
-            var seqId = getLastItem[0].orderId + 1;
+        // Deep Copy from (req.session.cart.products)
+        let orderCopy = JSON.parse(JSON.stringify(req.session.cart.products));
+        // delete linePayBody._id
+        orderCopy.forEach(item => delete item._id);
+
+        const order = {
+            amount: req.session.cart.paymentInfo.amount,
+            currency: 'TWD',
+            packages: [
+              {
+                id: parseInt(new Date().getTime() / 1000).toString(),
+                amount: req.session.cart.paymentInfo.amount,
+                products: orderCopy
+              }
+            ],
+            orderId: parseInt(new Date().getTime() / 1000).toString(),
+          };   
+        console.log(order);
+        
+        const linePayBody = {
+            ...order, // 解構賦值 (Destructuring assignment)
+            redirectUrls: {
+                confirmUrl: `${LINEPAY_RETURN_HOST}${LINEPAY_RETURN_CONFIRM_URL}`,
+                cancelUrl: `${LINEPAY_RETURN_HOST}${LINEPAY_RETURN_CANCEL_URL}`
+            }
         };
+        console.log(linePayBody);
+        // console.log(linePayBody.packages[0].products);
+        
+        const uri = "/payments/request";
+        
+        // Refactor to global function
+        const headers = createSignature(uri, linePayBody);
 
-        // 將 shopping cart 中購買的商品數量，更新至 product table
-        for (let i = 0 ; i < req.session.cart.length ; i++) {
-            const product = await productModel.updateOne({ _id : req.session.cart[i].product_id }, { "$inc" : { quantity : -req.session.cart[i].product_quantity }});
+        const url = `${LINEPAY_SITE}/${LINEPAY_VERSION}${uri}`;
+    
+        // Send request to linepay (url, linePayBody, headers)
+        const linePayRes = await axios.post(url, linePayBody, {headers});
+        // console.log("linePayRes", linePayRes);
+        
+        // 使用可選串連(optional chaining operator) 避免巢狀物件改變而發生 TypeError
+        if (linePayRes?.data?.returnCode === "0000") {
+            // 將用戶轉址到 paymentUrl web 付款頁面
+            res.redirect(linePayRes?.data?.info?.paymentUrl?.web);   
         };
-
-        const order = new orderModel({
-            orderId : seqId,
-            account : req.session.userInfo.account,
-            purchase : req.session.cart,
-            name : req.body.name,
-            deliveryAddress : req.body.deliveryAddress,
-            totalAmount: totalAmount,
-            status : "open",
-            message : []
-        });
-        const orderPost = await order.save();
-        // 清除 session.cart data
-        delete req.session.cart;
-        res.redirect(`/orders/${seqId}`);
 
     } catch (error) {
-        console.error(error.message);
-        res.status(500).send({error : error.message});
+        console.log(error);
+        res.end();
+    };
+})
+
+router.get("/linePay/confirm", async (req,res) => {
+    const { transactionId, orderId } = req.query;
+
+    try {
+        const linePayBody = {
+            amount: req.session.cart.paymentInfo.amount,
+            currency: "TWD"
+        };
+        
+        const uri = `/payments/${transactionId}/confirm`;
+        const headers = createSignature(uri, linePayBody);
+        const url = `${LINEPAY_SITE}/${LINEPAY_VERSION}${uri}`;
+        // Send request to linepay (url, linePayBody, headers)
+        const linePayRes = await axios.post(url, linePayBody, {headers});
+        console.log("linePayRes", linePayRes);
+        
+        // 將回傳的 transactionId 存入 session
+        req.session.cart.paymentInfo["transactionId"] = linePayRes?.data?.info?.transactionId;
+        
+        if (linePayRes?.data?.returnCode === "0000") {
+            // LinePay returnMessage: 'Success.', 
+
+            const db = connectDB();
+            // AUTO INCREMENT orderID in MongoDB order table (+1)
+            const getLastItem = await orderModel.find().sort({orderId: -1}).limit(1);
+            if (getLastItem.length === 0) {
+                var seqId = 1;
+            } else {
+                var seqId = getLastItem[0].orderId + 1;
+            };
+
+            // 將 shopping cart 中購買的商品數量，更新至 product table
+            for (let i = 0 ; i < req.session.cart.length ; i++) {
+                const product = await productModel.updateOne({ _id : req.session.cart[i]._id }, { "$inc" : { quantity : -req.session.cart[i].quantity }});
+            };
+
+            const order = new orderModel({
+                orderId : seqId,
+                account : req.session.userInfo.account,
+                purchase : req.session.cart.products,
+                recipientName : req.session.cart.paymentInfo.recipientName,
+                deliveryAddress : req.session.cart.paymentInfo.deliveryAddress,
+                totalAmount: req.session.cart.paymentInfo.amount,
+                status : "open",
+                message : [],
+                transactionId : req.session.cart.paymentInfo.transactionId
+            });
+
+            const orderPost = await order.save();
+            // 清除 session.cart data
+            delete req.session.cart;
+            res.redirect(`/orders/${seqId}`);   
+            };
+    } catch (error) {
+        res.end();
     };
 });
 

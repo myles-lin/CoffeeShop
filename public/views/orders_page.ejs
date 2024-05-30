@@ -105,10 +105,14 @@
                         <td><%= orders.updatedAt.toLocaleString('zh-TW') %></td>
                     </tr>
                     <tr>
-                        <th>Name</th>
-                        <td><%= orders.name %></td>
+                        <th>Recipient</th>
+                        <td><%= orders.recipientName %></td>
                         <th>Delivery address</th>
                         <td colspan="3"><%= orders.deliveryAddress %></td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">transactionId</th>
+                        <td colspan="4"><%= orders.transactionId %></td>
                     </tr>
                 </table>
                 <table>
@@ -126,16 +130,16 @@
                         orders.purchase.forEach((product, index) => { %>
                     <tr>
                         <td style="text-align: center;"><%= index + 1 %></td>
-                        <td><a href="/products/<%= product.product_id %>"><%= product.product_name %></a></td>
-                        <td style="text-align: center;"><%= product.product_quantity %></td>
-                        <td style="text-align: right;">$ <%= product.product_price %></td>
-                        <td style="text-align: right;">$ <%= parseFloat(product.product_quantity) * parseFloat(product.product_price) %></td>
+                        <td><a href="/products/<%= product._id %>"><%= product.name %></a></td>
+                        <td style="text-align: center;"><%= product.quantity %></td>
+                        <td style="text-align: right;">$ <%= product.price %></td>
+                        <td style="text-align: right;">$ <%= parseFloat(product.quantity) * parseFloat(product.price) %></td>
                     </tr>
-                    <%  total += parseFloat(product.product_quantity) * parseFloat(product.product_price);
+                    <%  total += parseFloat(product.quantity) * parseFloat(product.price);
                         }); %>
                     <tr>
                         <td colspan="4" aling="right"><b>Payment</b></td>
-                        <td style="text-align: right;">$ <%= total %></td>
+                        <td style="text-align: right;">$ <%= orders.totalAmount %></td>
                     </tr>
                     
                 </table>
