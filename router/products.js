@@ -54,7 +54,7 @@ router.post("/", async (req, res) => {
                 } else {
                     var seqId = getLastItem[0].pid + 1;
                 };
-            console.log("seqId",seqId);
+                
             data["pid"] =  seqId;
             let result = await productModel.insertMany(data);
             res.render("products_add.html");

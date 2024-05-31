@@ -6,9 +6,9 @@ const orderSchema = new mongoose.Schema({
     purchase : { type : Array, required : true },
     recipientName : { type : String, required : true },
     deliveryAddress : { type : String, required : true },
-    totalAmount : Number,
+    totalAmount : { type : Number, required : true },
     status : String,
-    transactionId : Number,
+    transactionId : { type : Number, required : true },
     message : Array
 }, {
     collection : "order",

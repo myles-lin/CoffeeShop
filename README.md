@@ -35,8 +35,8 @@
     | category | string | required | 商品種類 |
     | roastLevel | string | none | 咖啡烘焙程度 |
     | region | string | none | 咖啡產地 |
-    | quantity | number | none | 數量 |
-    | price | number | none | 價格 |
+    | quantity | number | required | 數量 |
+    | price | number | required | 價格 |
     | content | string | none | 商品敘述 |
     | imageUrl | string | none | 商品圖片 |
   + Order Model
@@ -47,9 +47,9 @@
     | purchase | array | required | 訂單列表 |
     | recipientName | string | required | 收件姓名 |
     | deliveryAddress | string | required | 收件地址 |
-    | totalAmount | number | none | 付款金額 |
+    | totalAmount | number | required | 付款金額 |
     | status | string | none | 訂單狀態 |
-    | transactionId | Number | 付款成功資訊 |  |
+    | transactionId | Number | required | 付款成功資訊 |
     | message | array | none | 訂單留言訊息 |
     | createdAt | Date | none | 建立訂單時間 |
     | updatedAt | Date | none | 更新訂單時間 |

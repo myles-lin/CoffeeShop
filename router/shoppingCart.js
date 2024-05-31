@@ -24,6 +24,7 @@ router.post("/", (req, res) => {
     const product_name = req.body.product_name;
     const product_quantity = req.body.product_quantity;
     const product_price = req.body.product_price;
+    const product_imageUrl = req.body.product_imageUrl;
     
     let existInCart = false;
     for (let i = 0 ; i < req.session.cart.products.length ; i++) {
@@ -38,6 +39,7 @@ router.post("/", (req, res) => {
             name : product_name,
             quantity : parseFloat(product_quantity),
             price : parseFloat(product_price),
+            imageUrl : product_imageUrl
         };
         req.session.cart.products.push(cart_data);
     };

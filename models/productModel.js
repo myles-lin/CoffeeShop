@@ -17,8 +17,8 @@ const productSchema = new mongoose.Schema({
     },
     roastLevel : String,
     region : String,
-    quantity : Number,
-    price : Number,
+    quantity : { type : Number, required : true },
+    price : { type : Number, required : true },
     content : String,
     imageUrl : String
 }, {
