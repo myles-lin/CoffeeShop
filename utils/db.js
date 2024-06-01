@@ -6,14 +6,26 @@ const {
     MONGODB_PWD
 } = process.env;
 
-const connectDB = async() => {
+const uri = `mongodb+srv://${MONGODB_USER}:${MONGODB_PWD}@mycluster.jjhn1gj.mongodb.net/coffeeeShop?retryWrites=true&w=majority`;
+const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
+
+const connectToMongoDB = async() => {
     try {
-        await mongoose.connect(`mongodb+srv://${MONGODB_USER}:${MONGODB_PWD}@mycluster.jjhn1gj.mongodb.net/coffeeeShop`);
-        console.log("MongoDB connected");
-    } catch(error) {
+        // await mongoose.connect(`mongodb+srv://${MONGODB_USER}:${MONGODB_PWD}@mycluster.jjhn1gj.mongodb.net/coffeeeShop`);
+        await mongoose.connect(uri, clientOptions);
+        console.log("MongoDB Atlas connected");
+    } catch (error) {
         console.error(error.message);
-        res.status(500).send({error : error.message});
     };
 };
 
-module.exports = connectDB;
+const closeMongoDBConnection = async () => {
+    try {
+      await mongoose.disconnect();
+      console.log('MongoDB Altas connection closed');
+    } catch (error) {
+        console.error(error.message);
+    };
+};
+
+module.exports = {connectToMongoDB, closeMongoDBConnection};

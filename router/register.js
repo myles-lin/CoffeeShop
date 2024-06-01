@@ -9,7 +9,6 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-    const db = connectDB();
     try {
         let account = req.body.account;
         let password = req.body.password;

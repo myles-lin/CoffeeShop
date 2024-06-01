@@ -10,7 +10,6 @@ router.get("/", async (req, res) => {
         if (req.session.userInfo === undefined || req.session.userInfo.account !== "admin") {
             return res.status(403).send({ message : "Permission Denied"});
         };
-        const db = connectDB();
         // sort list by pid
         const product = await productModel.find().sort({pid: 1});
         res.render("products_manage", { products : product });
@@ -21,7 +20,6 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-    const db = connectDB();
     try {
         const result = await productModel.findOne({_id: req.params.id});
         res.render("products_page", { products : result, manageHeader : req.session});
@@ -33,7 +31,6 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-    const db = connectDB();
     try {
         // permission control
         if (req.session.userInfo.account !== "admin") {
@@ -140,7 +137,6 @@ router.post("/imageUpload", upload.single("file"), async (req, res) => {
 });
 
 router.get("/f/search", async (req, res) => {
-    const db = connectDB();
     try {
         const data = req.query;
         const key = Object.keys(req.query)[0];
@@ -163,7 +159,6 @@ router.get("/f/add", (req, res) => {
 });
 
 router.get("/f/edit", async (req, res) => {
-    const db = connectDB();
     try {
         // permission control
         if (req.session.userInfo.account !== "admin") {
@@ -183,7 +178,6 @@ router.get("/f/edit", async (req, res) => {
 
 
 router.patch("/:id", async (req, res) => {
-    const db = connectDB();
     try {
         // permission control
         if (req.session.userInfo.account !== "admin") {
@@ -199,7 +193,6 @@ router.patch("/:id", async (req, res) => {
 });
 
 router.delete("/:id", async (req, res) => {
-    const db = connectDB();
     try {
         // permission control
         if (req.session.userInfo.account !== "admin") {
@@ -220,7 +213,6 @@ router.delete("/:id", async (req, res) => {
 router.post("/test", async (req, res) => {
     let obj = JSON.parse(fs.readFileSync("../raw/raw_data2.json", 'utf8'));
     console.log(obj);
-    const db = connectDB();
     let result = await productModel.insertMany(obj);
     console.log("OK");
 });

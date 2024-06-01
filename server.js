@@ -6,7 +6,8 @@ const path = require("path");
 const hbs = require("hbs");
 const bodyParser = require("body-parser");
 const session = require("express-session");
-// const connectDB = require("./utils/db");
+const { connectToMongoDB, closeMongoDBConnection } = require("./utils/db");
+connectToMongoDB();
 
 const redis = require("redis");
 const redisClient = redis.createClient({
@@ -69,6 +70,11 @@ app.get("/signout", (req, res) => {
 app.get("/error", (req, res) => {
     let message = req.query.msg;
     res.render("error", { message : message, manageHeader : req.session});
+});
+
+process.on('SIGINT', async () => {
+    await closeMongoDBConnection();
+    process.exit(0);
 });
 
 app.listen(portNum, ()=>{

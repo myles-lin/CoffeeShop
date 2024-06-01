@@ -13,7 +13,6 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", async (req, res, next) => {
-    const db = connectDB();
     try {
         let account = req.body.account;
         let password = req.body.password;

@@ -42,7 +42,6 @@ router.get("/", async (req, res) => {
         if (req.session.userInfo.account !== "admin") {
             return res.status(403).send({ message : "Permission Denied"});
         };
-        const db = connectDB();
         const order = await orderModel.find();
         res.render("orders_manage", { orders : order });
     } catch (error) {
@@ -52,7 +51,6 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-    const db = connectDB();
     try {
         const orderData = await orderModel.findOne({ orderId : req.params.id });
         console.log(orderData);
@@ -73,7 +71,6 @@ router.post("/", async (req, res) => {
 
     // check products inventory
     const cartProudct = req.session.cart.products;
-    const db = connectDB();
     try {
         var errorList = [];
         var totalAmount = 0;
@@ -179,7 +176,6 @@ router.get("/linePay/confirm", async (req,res) => {
         if (linePayRes?.data?.returnCode === "0000") {
             // LinePay returnMessage: 'Success.', 
 
-            const db = connectDB();
             // AUTO INCREMENT orderID in MongoDB order table (+1)
             const getLastItem = await orderModel.find().sort({orderId: -1}).limit(1);
             if (getLastItem.length === 0) {
@@ -217,7 +213,6 @@ router.get("/linePay/confirm", async (req,res) => {
 });
 
 router.post("/:id/message", async (req, res) => {
-    const db = connectDB();
     try {
         const message = req.body.message;
         const date = new Date();
@@ -246,7 +241,6 @@ router.post("/:id/message", async (req, res) => {
 });
 
 router.delete("/:id/message", async (req, res) => {
-    const db = connectDB();
     try {
         const order = await orderModel.findOne({ orderId : req.params.id });
         // permission control

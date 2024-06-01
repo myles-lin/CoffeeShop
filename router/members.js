@@ -9,7 +9,6 @@ router.get("/page", async (req, res) => {
     if (!req.session.userInfo || req.session.userInfo.isLogined !== true) {
         return res.redirect("/error?msg=Not logged in yet.");
     };
-    const db = connectDB();
     try {
         const userInfo = await memberModel.findOne({ account : req.session.userInfo.account });
         const account = userInfo.account;
@@ -27,7 +26,6 @@ router.get("/", async (req, res) => {
         if (req.session.userInfo.account !== "admin") {
             return res.status(403).send({ message : "Permission Denied"});
         };
-        const db = connectDB();
         const member = await memberModel.find();
         res.render("members_manage", { members : member, manageHeader : req.session });
     } catch (error) {
@@ -37,7 +35,6 @@ router.get("/", async (req, res) => {
 });
 
 // router.put("/:account", async (req, res) => {
-//     const db = connectDB();
 //     try {
 //         const result = await memberModel.updateOne({account: req.params.account}, {$set: req.body});
 //         res.status(200).send(result);
@@ -48,7 +45,6 @@ router.get("/", async (req, res) => {
 // });
 
 router.patch("/:id", async (req, res) => {
-    const db = connectDB();
     try {
         const memberInfo = await memberModel.findOne({_id: req.params.id});
         // permission control
