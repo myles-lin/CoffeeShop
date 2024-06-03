@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require('mongoose');
-const connectDB = require("../utils/db");
 const memberModel = require("../models/memberModel");
+
 
 router.get("/", (req, res) => {
     res.render("register", {manageHeader : req.session});

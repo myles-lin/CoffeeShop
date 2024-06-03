@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const connectDB = require("../utils/db");
 const productModel = require("../models/productModel");
 const orderModel = require("../models/orderModel");
-const memberModel = require("../models/memberModel");
+
 
 /* LinePay setting */
 require("dotenv").config();

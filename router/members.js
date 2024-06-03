@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require('mongoose');
-const connectDB = require("../utils/db");
 const memberModel = require("../models/memberModel");
 const orderModel = require("../models/orderModel");
+
 
 router.get("/page", async (req, res) => {
     if (!req.session.userInfo || req.session.userInfo.isLogined !== true) {

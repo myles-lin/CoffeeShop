@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const connectDB = require("../utils/db");
 const validator = require("../utils/validator");
 const memberModel = require("../models/memberModel");
+
 
 router.get("/", (req, res) => {
     if (req.session.userInfo !== undefined) {

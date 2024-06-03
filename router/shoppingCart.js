@@ -1,7 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const connectDB = require("../utils/db");
-const productModel = require("../models/productModel");
 
 
 router.get("/", (req, res) => {

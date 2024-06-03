@@ -41,16 +41,14 @@ app.use(session({
 // 引入 /router/xxx.js
 const loginRouter = require("./router/login");
 const registerRouter = require("./router/register");
-// const adminRouter = require("./router/adminAuth");
 const membersRouter = require("./router/members");
 const productsRouter = require("./router/products");
 const shoppingCartRouter = require("./router/shoppingCart");
 const ordersRouter = require("./router/orders");
 
-// 將 requests, 導入到 booksRouter 處理
+// 將 requests, 導入到 xxxRouter 處理
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
-// app.use("/adminAuth", adminRouter);login
 app.use("/members", membersRouter);
 app.use("/products", productsRouter);
 app.use("/shoppingCart", shoppingCartRouter);

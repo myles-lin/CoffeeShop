@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require('mongoose'); /* 似乎在這頁面沒用到 */
-const connectDB = require("../utils/db");
 const productModel = require("../models/productModel");
 const fs = require("fs");
+
 
 router.get("/", async (req, res) => {
     try {
@@ -211,7 +210,7 @@ router.delete("/:id", async (req, res) => {
 
 // 把所有產品直接導入 products table
 router.post("/test", async (req, res) => {
-    let obj = JSON.parse(fs.readFileSync("../raw/raw_data2.json", 'utf8'));
+    let obj = JSON.parse(fs.readFileSync("../raw/raw_data.json", 'utf8'));
     console.log(obj);
     let result = await productModel.insertMany(obj);
     console.log("OK");
