@@ -61,7 +61,7 @@
     <nav>
     <div class="container">
         <div class="d-flex outer">
-            <div class="row desktop-menu">
+            <div class="row desktop-mode">
                 <div id="category-menu">
                     <form action="/products/f/search" method="GET">
                         <input type="search" name="name" placeholder="Press enter to search">
@@ -95,11 +95,11 @@
                         <th>No.</th>
                         <th>Name</th>
                         <th>Category</th>
-                        <th>RoastLevel</th>
-                        <th>Region</th>
+                        <th class="desktop-mode">RoastLevel</th>
+                        <th class="desktop-mode">Region</th>
                         <th>Qty</th>
                         <th>Price</th>
-                        <th colspan="2">Image Upload</th>
+                        <th colspan="2" class="desktop-mode">Image Upload</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -109,13 +109,13 @@
                         <td><%= index+1 %></td>
                         <td><a href="/products/<%= product._id %>"><%= product.name %></a></td>
                         <td><%= product.category %></td>
-                        <td><%= product.roastLevel %></td>
-                        <td><%= product.region %></td>
+                        <td class="desktop-mode"><%= product.roastLevel %></td>
+                        <td class="desktop-mode"><%= product.region %></td>
                         <td style="text-align: right;"><%= product.quantity %></td>
                         <td style="text-align: right;"><%= product.price %></td>
                         <!-- <td><%= product.content %></td> -->
-                        <td><%= imageExist %></td>
-                        <td>
+                        <td class="desktop-mode"><%= imageExist %></td>
+                        <td class="desktop-mode">
                             <form action="/products/imageUpload" method="POST" enctype="multipart/form-data">
                                 <input style="font-size: 13px" type="file" name="file">
                                 <input type="hidden" name="product_id" value="<%= product._id %>">

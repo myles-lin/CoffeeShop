@@ -5,6 +5,10 @@
     box-sizing: border-box;
 }
 
+html {
+    background-color:#d3d7d8
+}
+
 /* header 選單設定 start */
 header {
     background-color: white;
@@ -306,7 +310,7 @@ textarea {
     h1 {
         font-size: 0px;
     }
-    .desktop-menu {
+    .desktop-mode {
         display: none;
     }
 }

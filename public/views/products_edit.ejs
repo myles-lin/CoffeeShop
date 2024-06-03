@@ -68,7 +68,7 @@
     <nav>
     <div class="container">
         <div class="d-flex outer">
-            <div class="row">
+            <div class="row desktop-mode">
                 <div id="category-menu">
                     <form action="/products/f/search" method="GET">
                         <input type="search" name="name" placeholder="Press enter to search">
@@ -100,7 +100,7 @@
                     <div>
                         <label for="name">Name</label>
                         <!-- <input style="margin-left: 28px;" type="text" id="name" name="name" required> -->
-                        <%= product.name %>
+                        <a style="font-size: 18px;"><%= product.name %></a>
                     </div>
                     <div>
                         <label for="category">Category</label>
@@ -145,7 +145,7 @@
                     </div>
                     <div>
                         <label for="image url">Image Url</label>
-                        <a href="<%= product.imageUrl %>"><%= shortUrl %></a>
+                        <a href="<%= product.imageUrl %>" style="font-size: 18px;"><%= shortUrl %></a>
                     </div>
                     <div>
                         <label for="content">Content</label><br><br><br>

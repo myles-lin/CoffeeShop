@@ -167,7 +167,7 @@ router.get("/f/edit", async (req, res) => {
         const productInfo = await productModel.findOne({ _id : req.query.product_id });
         var shortUrl = "no imageUrl found";
         if (productInfo.imageUrl) {
-            var shortUrl = productInfo.imageUrl.split("com")[1]; };
+            var shortUrl = "Click to confirm image"; };
         res.render("products_edit", { product : productInfo, shortUrl : shortUrl, manageHeader : req.session});
     } catch (error) {
         console.error(error.message);
