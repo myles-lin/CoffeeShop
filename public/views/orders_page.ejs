@@ -50,9 +50,12 @@
                 <% } %>
                 <li><a href="/">Home</a></li>
                 <li><a href="/members/page">MEMBER</a></li>
-                <li><a href="/shoppingCart">CART</a></li>
+                <% if (!manageHeader.userInfo) { %>
                 <li><a href="/login">SIGNIN</a></li>
+                <% } else { %>
                 <li><a href="/signout">SIGNOUT</a></li>
+                <% } %>
+                <li><a href="/shoppingCart">CART</a></li>
              </ul>
        </nav>
     </header>

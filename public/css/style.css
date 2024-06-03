@@ -73,6 +73,14 @@ header nav ul li ul li a:hover {
 }
 /* header 選單設定 end */
 
+h1 {
+    position: absolute;
+    left: 80px;
+    top: 0;
+    line-height: 80px;
+}
+
+
 h3 {
     text-align: center;
     /* margin-bottom: 20px; */
@@ -281,6 +289,10 @@ input[type=search] {
     border: solid gray 2px;
 }
 
+textarea {
+    width: 100%;
+}
+
 /*- product page setting start -*/
 .p-item__list {
 	display: grid;
@@ -290,12 +302,23 @@ input[type=search] {
 }
 
 /* product page layout */
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 0px;
+    }
+    .desktop-menu {
+        display: none;
+    }
+}
+
+
 @media screen and (min-width: 768px) {
 	.p-item__list {
 		grid-template-columns: 1fr 1fr 1fr;
 		gap: 2vw;
 	}
 }
+
 @media screen and (min-width: 1600px) {
 	.p-item__list {
 		grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -423,3 +446,4 @@ footer {
 .itemSearch__btn {
     border-left: 1px solid var(--NavTextColorBgOn);
 }
+

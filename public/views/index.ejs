@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <h1 style="position: absolute;left: 80px;top: 0;line-height: 80px;">Code Coffee</h1>
+        <h1>Code Coffee</h1>
         <nav>
             <ul>
                 <% if (manageHeader.userInfo !== undefined && manageHeader.userInfo.account === "admin") { %>
@@ -26,9 +26,12 @@
                 <% } %>
                 <li><a href="/">Home</a></li>
                 <li><a href="/members/page">MEMBER</a></li>
-                <li><a href="/shoppingCart">CART</a></li>
+                <% if (!manageHeader.userInfo) { %>
                 <li><a href="/login">SIGNIN</a></li>
+                <% } else { %>
                 <li><a href="/signout">SIGNOUT</a></li>
+                <% } %>
+                <li><a href="/shoppingCart">CART</a></li>
              </ul>
        </nav>
     </header>

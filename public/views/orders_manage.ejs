@@ -48,9 +48,12 @@
                 </li>
                 <li><a href="/">Home</a></li>
                 <li><a href="/members/page">MEMBER</a></li>
-                <li><a href="#">CART</a></li>
+                <% if (!manageHeader.userInfo) { %>
                 <li><a href="/login">SIGNIN</a></li>
-                <li><a href="/members/signout">SIGNOUT</a></li>
+                <% } else { %>
+                <li><a href="/signout">SIGNOUT</a></li>
+                <% } %>
+                <li><a href="/shoppingCart">CART</a></li>
              </ul>
        </nav>
     </header>
@@ -58,7 +61,7 @@
     <nav>
     <div class="container">
         <div class="d-flex outer">
-            <div class="row">
+            <div class="row desktop-menu">
                 <div id="category-menu">
                     <form action="/products/f/search" method="GET">
                         <input type="search" name="name" placeholder="Press enter to search">

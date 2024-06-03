@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
         };
         // sort list by pid
         const product = await productModel.find().sort({pid: 1});
-        res.render("products_manage", { products : product });
+        res.render("products_manage", { products : product , manageHeader : req.session});
     } catch (error) {
         console.error(error.message);
         res.status(500).send({error : error.message});
@@ -154,7 +154,7 @@ router.get("/f/search", async (req, res) => {
 });
 
 router.get("/f/add", (req, res) => {
-    res.render("products_add.html");
+    res.render("products_add", { manageHeader : req.session });
 });
 
 router.get("/f/edit", async (req, res) => {
@@ -168,7 +168,7 @@ router.get("/f/edit", async (req, res) => {
         var shortUrl = "no imageUrl found";
         if (productInfo.imageUrl) {
             var shortUrl = productInfo.imageUrl.split("com")[1]; };
-        res.render("products_edit", { product : productInfo, shortUrl : shortUrl});
+        res.render("products_edit", { product : productInfo, shortUrl : shortUrl, manageHeader : req.session});
     } catch (error) {
         console.error(error.message);
         res.status(500).send({error : error.message});

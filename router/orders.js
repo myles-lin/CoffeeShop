@@ -42,7 +42,7 @@ router.get("/", async (req, res) => {
             return res.status(403).send({ message : "Permission Denied"});
         };
         const order = await orderModel.find();
-        res.render("orders_manage", { orders : order });
+        res.render("orders_manage", { orders : order, manageHeader : req.session});
     } catch (error) {
         console.error(error.message);
         res.status(500).send({error : error.message});
