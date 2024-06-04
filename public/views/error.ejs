@@ -31,7 +31,8 @@
                 <% } else { %>
                 <li><a href="/signout">SIGNOUT</a></li>
                 <% } %>
-                <li><a href="/shoppingCart">CART</a></li>
+                <% let sum = 0; if (manageHeader.cart) { manageHeader.cart.products.forEach(item => { sum += item.quantity }) }%>
+                <li><a href="/shoppingCart">CART (<%= sum %>)</a></li>
              </ul>
        </nav>
     </header>
@@ -67,7 +68,7 @@
 
             <div class="row flex-2">
                 <div class="container">
-                    <h1 style="text-align: center;">Message</h1>
+                    <h2 style="text-align: center;">Message</h2>
                     <br><br><br>
                     <div class="error-message"><%= message %></div>
                     <br><br><br>

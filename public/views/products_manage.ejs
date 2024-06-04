@@ -53,7 +53,8 @@
                 <% } else { %>
                 <li><a href="/signout">SIGNOUT</a></li>
                 <% } %>
-                <li><a href="/shoppingCart">CART</a></li>
+                <% let sum = 0; if (manageHeader.cart) { manageHeader.cart.products.forEach(item => { sum += item.quantity }) }%>
+                <li><a href="/shoppingCart">CART (<%= sum %>)</a></li>
              </ul>
        </nav>
     </header>

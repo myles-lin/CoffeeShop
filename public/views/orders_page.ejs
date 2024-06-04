@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Coffee</title>
+    <title>Order Page</title>
     <link rel="stylesheet" href="/css/style.css" type="text/css">
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script>
@@ -55,7 +55,8 @@
                 <% } else { %>
                 <li><a href="/signout">SIGNOUT</a></li>
                 <% } %>
-                <li><a href="/shoppingCart">CART</a></li>
+                <% let sum = 0; if (manageHeader.cart) { manageHeader.cart.products.forEach(item => { sum += item.quantity }) }%>
+                <li><a href="/shoppingCart">CART (<%= sum %>)</a></li>
              </ul>
        </nav>
     </header>
@@ -90,6 +91,7 @@
             </div>
 
             <div class="row_d-flex-col flex-2" style="align-items: center;">
+                <h2 style="margin-bottom: 20px;">Order Page</h2>
                 <table>
                     <tr>
                         <th>Order ID</th>

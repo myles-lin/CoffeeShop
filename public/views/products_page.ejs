@@ -31,7 +31,8 @@
                 <% } else { %>
                 <li><a href="/signout">SIGNOUT</a></li>
                 <% } %>
-                <li><a href="/shoppingCart">CART</a></li>
+                <% let sum = 0; if (manageHeader.cart) { manageHeader.cart.products.forEach(item => { sum += item.quantity }) }%>
+                <li><a href="/shoppingCart">CART (<%= sum %>)</a></li>
              </ul>
        </nav>
     </header>
@@ -69,11 +70,15 @@
                 <div class="container">
                     <div class="d-flex outer">
                         <div class="row">
-                            <div class="swiper-slide p-itemimg__listitem img__wrap swiper-slide-visible swiper-slide-active" role="group" aria-label="1 / 4" style="width: 420px; opacity: 1; transform: translate3d(0px, 0px, 0px);">
-                                <img src="<%= products.imageUrl %>" alt="Competition Wave Filters (50 pcs per box)"></div>
+                            <div class="p-itemimg__listitem img__wrap desktop-mode" role="group" aria-label="1 / 4" style="width: 420px; opacity: 1; transform: translate3d(0px, 0px, 0px);">
+                                <img src="<%= products.imageUrl %>" alt="<%= products.name %>">
+                            </div>
                         </div>
                         <div class="row_d-flex-col flex-2">
-                            <h1 class="p-item__title content-box" ><%= products.name %></h1>
+                            <div class="p-itemimg__listitem img__wrap mobile-mode" role="group" aria-label="1 / 4" style="width: 420px; opacity: 1; transform: translate3d(0px, 0px, 0px);">
+                                <img src="<%= products.imageUrl %>" alt="<%= products.name %>" style="width: 75%; height: auto;">
+                            </div>
+                            <h2 class="p-item__title content-box" ><%= products.name %></h2>
                             <div class="p-item__price content-box">$<%= products.price %></div>
                             <br>
                             <div class="p-item__description content-box"><%= products.content %></div>

@@ -189,7 +189,7 @@ a {
 }
 
 .content-box {
-    padding: 5px;
+    padding: 5px 15px;
     /* margin: 5px; */
     font-size: 16px;
     white-space: pre-wrap;
@@ -313,6 +313,9 @@ textarea {
     .desktop-mode {
         display: none;
     }
+    .mobile-mode {
+        display: block;
+    }
 }
 
 
@@ -321,6 +324,9 @@ textarea {
 		grid-template-columns: 1fr 1fr 1fr;
 		gap: 2vw;
 	}
+    .mobile-mode {
+        display: none;
+    }  
 }
 
 @media screen and (min-width: 1600px) {

@@ -29,7 +29,8 @@
                 <% } else { %>
                 <li><a href="/signout">SIGNOUT</a></li>
                 <% } %>
-                <li><a href="/shoppingCart">CART</a></li>
+                <% let sum = 0; if (manageHeader.cart) { manageHeader.cart.products.forEach(item => { sum += item.quantity }) }%>
+                <li><a href="/shoppingCart">CART (<%= sum %>)</a></li>
              </ul>
        </nav>
     </header>
@@ -65,7 +66,7 @@
 
             <div class="row flex-2">
                 <form action="/products" method="POST" id="form-product" class="form-group">
-                    <h2 style="margin-bottom: 20px; text-align: center;">Add new product</h2>
+                    <h2 style="text-align: center; margin-bottom: 20px;">Add new product</h2>
                     <div>
                         <label for="name">Name</label>
                         <input style="margin-left: 28px;" type="text" id="name" name="name" required>
