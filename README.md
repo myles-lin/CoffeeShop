@@ -77,4 +77,6 @@
   | Update Member | PATCH | /members/:id | member
 - ### Third-Party Payment(LINE Pay)
   串接金流：<br>
-  用戶購買商品下單後，連接 LINE Pay Payment APIs 進行付款(Sandbox Environment)，接收到Confirm API付款成功的回應，將訂單資訊寫入資料庫。
+  用戶購買商品下單後，連接 LINE Pay Payment APIs 進行付款(Sandbox Environment)，接收到Confirm API付款成功的回應，將訂單資訊寫入資料庫。<br>
+  ![](https://raw.githubusercontent.com/myles-lin/ImageStore/main/coffeeshop/ScanLinePayQRcode.png)
+  <img src="https://raw.githubusercontent.com/myles-lin/ImageStore/main/coffeeshop/before_userpays.JPEG" width=45% heihgt=45%> <img src="https://raw.githubusercontent.com/myles-lin/ImageStore/main/coffeeshop/after_userpays.JPEG" width=45% heihgt=45%>
