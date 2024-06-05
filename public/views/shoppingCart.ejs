@@ -40,7 +40,7 @@
                 <li>
                     <a>MANAGE</a>
                     <ul>
-                        <li><a href="/products/f/add">Add Products</a></li>
+                        <li><a href="/products/add">Add Products</a></li>
                         <li><a href="/products">Products List</a></li>
                         <li><a href="/orders">Orders List</a></li>
                         <li><a href="/members">Members List</a></li>
@@ -65,7 +65,7 @@
         <div class="d-flex outer">
             <div class="row">
                 <div id="category-menu">
-                    <form action="/products/f/search" method="GET">
+                    <form action="/products/search" method="GET">
                         <input type="search" name="name" placeholder="Press enter to search">
                     </form>
                     <br>
@@ -73,20 +73,21 @@
                         <div class="category-list"> 
                             <ul>
                                 <li> <a>Roast Level</a>
-                                    <ul><li><form action="/products/f/search" method="GET"> <input type="hidden" name="roastLevel" value="light roast"/> <input type="submit" value="Light roast"> </form></li>  
-                                        <li><form action="/products/f/search" method="GET"> <input type="hidden" name="roastLevel" value="medium roast"/> <input type="submit" value="Medium roast"> </form></li>  
-                                        <li><form action="/products/f/search" method="GET"> <input type="hidden" name="roastLevel" value="dark roast"/> <input type="submit" value="Dark roast"></form>  </li>  </ul>  </li>  
+                                    <ul><li><form action="/products/search" method="GET"> <input type="hidden" name="roastLevel" value="light roast"/> <input type="submit" value="Light roast"> </form></li>  
+                                        <li><form action="/products/search" method="GET"> <input type="hidden" name="roastLevel" value="medium roast"/> <input type="submit" value="Medium roast"> </form></li>  
+                                        <li><form action="/products/search" method="GET"> <input type="hidden" name="roastLevel" value="dark roast"/> <input type="submit" value="Dark roast"></form>  </li>  </ul>  </li>  
                                 <li> <a>Region</a>  
-                                    <ul><li><form action="/products/f/search" method="GET"> <input type="hidden" name="region" value="asia"/> <input type="submit" value="Asia"> </form></li>  
-                                        <li><form action="/products/f/search" method="GET"> <input type="hidden" name="region" value="latin america"/> <input type="submit" value="Latin America"> </form></li>  
-                                        <li><form action="/products/f/search" method="GET"> <input type="hidden" name="region" value="africa"/> <input type="submit" value="Africa"> </form> </li>  </ul>  </li>  
+                                    <ul><li><form action="/products/search" method="GET"> <input type="hidden" name="region" value="asia"/> <input type="submit" value="Asia"> </form></li>  
+                                        <li><form action="/products/search" method="GET"> <input type="hidden" name="region" value="latin america"/> <input type="submit" value="Latin America"> </form></li>  
+                                        <li><form action="/products/search" method="GET"> <input type="hidden" name="region" value="africa"/> <input type="submit" value="Africa"> </form> </li>  </ul>  </li>  
                                 <li> <a>Equipment</a>  
-                                    <ul><li><form action="/products/f/search" method="GET"> <input type="hidden" name="category" value="brewing"/> <input type="submit" value="Coffee Brewing"> </form> </li>  
-                                        <li><form action="/products/f/search" method="GET"> <input type="hidden" name="category" value="grinder"/> <input type="submit" value="Coffee Grinder"> </form> </li>  
-                                        <li><form action="/products/f/search" method="GET"> <input type="hidden" name="category" value="others"/> <input type="submit" value="Others"> </form> </li>  </ul>  </li>    
+                                    <ul><li><form action="/products/search" method="GET"> <input type="hidden" name="category" value="brewing"/> <input type="submit" value="Coffee Brewing"> </form> </li>  
+                                        <li><form action="/products/search" method="GET"> <input type="hidden" name="category" value="grinder"/> <input type="submit" value="Coffee Grinder"> </form> </li>  
+                                        <li><form action="/products/search" method="GET"> <input type="hidden" name="category" value="others"/> <input type="submit" value="Others"> </form> </li>  </ul>  </li>    
                             </ul>
                         </div>        
                 </div>
+
             </div>
 
             <div class="row_d-flex-col flex-2" style="align-items: center;">

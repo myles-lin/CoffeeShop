@@ -18,6 +18,46 @@ router.get("/", async (req, res) => {
     };
 });
 
+router.get("/search", async (req, res) => {
+    try {
+        const data = req.query;
+        const key = Object.keys(req.query)[0];
+        const value = Object.values(req.query)[0];
+        let result = await productModel.find({ [key] : { $regex : value, $options : 'i' }});  // 查詢不分大小寫
+        if (result.length === 0) {
+            // res.send("There's no items for sale.");
+            res.redirect("/error?msg=There's no items for sale.")
+        } else {
+            res.render("products_search",{ products : result, manageHeader : req.session });
+        };
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send({error : error.message});
+    };
+});
+
+router.get("/add", (req, res) => {
+    res.render("products_add", { manageHeader : req.session });
+});
+
+router.get("/edit", async (req, res) => {
+    try {
+        // permission control
+        if (req.session.userInfo.account !== "admin") {
+            return res.status(403).send({ message : "Permission Denied"});
+        };
+
+        const productInfo = await productModel.findOne({ _id : req.query.product_id });
+        var shortUrl = "no imageUrl found";
+        if (productInfo.imageUrl) {
+            var shortUrl = "Click to confirm image"; };
+        res.render("products_edit", { product : productInfo, shortUrl : shortUrl, manageHeader : req.session});
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send({error : error.message});
+    };
+});
+
 router.get("/:id", async (req, res) => {
     try {
         const result = await productModel.findOne({_id: req.params.id});
@@ -53,7 +93,7 @@ router.post("/", async (req, res) => {
                 
             data["pid"] =  seqId;
             let result = await productModel.insertMany(data);
-            res.render("products_add.html");
+            res.render("products_add", { manageHeader : req.session });
         };
     } catch (error) {
         console.error(error.message);
@@ -134,47 +174,6 @@ router.post("/imageUpload", upload.single("file"), async (req, res) => {
     };
 
 });
-
-router.get("/f/search", async (req, res) => {
-    try {
-        const data = req.query;
-        const key = Object.keys(req.query)[0];
-        const value = Object.values(req.query)[0];
-        let result = await productModel.find({ [key] : { $regex : value, $options : 'i' }});  // 查詢不分大小寫
-        if (result.length === 0) {
-            // res.send("There's no items for sale.");
-            res.redirect("/error?msg=There's no items for sale.")
-        } else {
-            res.render("products_search",{ products : result, manageHeader : req.session });
-        };
-    } catch (error) {
-        console.error(error.message);
-        res.status(500).send({error : error.message});
-    };
-});
-
-router.get("/f/add", (req, res) => {
-    res.render("products_add", { manageHeader : req.session });
-});
-
-router.get("/f/edit", async (req, res) => {
-    try {
-        // permission control
-        if (req.session.userInfo.account !== "admin") {
-            return res.status(403).send({ message : "Permission Denied"});
-        };
-
-        const productInfo = await productModel.findOne({ _id : req.query.product_id });
-        var shortUrl = "no imageUrl found";
-        if (productInfo.imageUrl) {
-            var shortUrl = "Click to confirm image"; };
-        res.render("products_edit", { product : productInfo, shortUrl : shortUrl, manageHeader : req.session});
-    } catch (error) {
-        console.error(error.message);
-        res.status(500).send({error : error.message});
-    };
-});
-
 
 router.patch("/:id", async (req, res) => {
     try {
